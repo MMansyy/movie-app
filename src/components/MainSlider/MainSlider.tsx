@@ -1,8 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectFade, Autoplay } from 'swiper/modules';
 import { AnimatePresence, motion } from 'framer-motion';
-
-import 'swiper/css/effect-fade';
 import './MainSlider.css'; // استيراد ملف CSS الخاص بالمكون
 import { useEffect, useState } from 'react';
 import axios from '../../utils/axios.global.ts';

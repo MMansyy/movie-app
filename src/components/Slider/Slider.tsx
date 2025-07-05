@@ -1,8 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Mousewheel, FreeMode } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/mousewheel';
 import './Slider.css';
 import axiosInstance from '../../utils/axios.global';
 import { useQuery } from '@tanstack/react-query';
