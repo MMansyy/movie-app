@@ -46,11 +46,11 @@ export default function Slider({ text }: SliderProps) {
                     breakpoints={{
                         320: {
                             slidesPerView: 2,
-                            spaceBetween: 40,
+                            spaceBetween: 0,
                         },
                         768: {
                             slidesPerView: 3,
-                            spaceBetween: 0,
+                            spaceBetween: -20,
                         },
                         1024: {
                             slidesPerView: 4,
@@ -69,7 +69,9 @@ export default function Slider({ text }: SliderProps) {
                     className="w-full Slider"
                 >
                     {trendingMovies.map((movie) => (
-                        <SwiperSlide key={movie.id}>
+                        <SwiperSlide key={movie.id}
+                            className="mx-6 md:mx-0">
+                            
                             <img
                                 src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
                                 alt={movie.title}

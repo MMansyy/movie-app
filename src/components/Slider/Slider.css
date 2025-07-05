@@ -36,15 +36,6 @@
     top: 25%;
 }
 
-@media (max-width: 768px) {
-    .Slider .swiper-button-prev {
-        left: -30px;
-    }
-
-    .Slider .swiper-button-next {
-        right: -30px;
-    }
-}
 
 
 .Slider {
