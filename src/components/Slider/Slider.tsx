@@ -46,7 +46,7 @@ export default function Slider({ text }: SliderProps) {
                     breakpoints={{
                         320: {
                             slidesPerView: 2,
-                            spaceBetween: 0,
+                            spaceBetween: 40,
                         },
                         768: {
                             slidesPerView: 3,
