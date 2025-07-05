@@ -1,4 +1,3 @@
-import React from 'react'
 import MainSlider from '../../components/MainSlider/MainSlider'
 import Slider from '../../components/Slider/Slider'
 
