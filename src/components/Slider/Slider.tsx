@@ -42,7 +42,7 @@ export default function Slider() {
                 breakpoints={{
                     320: {
                         slidesPerView: 2,
-                        spaceBetween: 70,      
+                        spaceBetween: 50,      
                     },
                     768: {
                         slidesPerView: 3,
