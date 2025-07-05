@@ -53,7 +53,7 @@ export default function Slider() {
                         spaceBetween: -140,     
                     },
                 }}
-                className="w-full relative Slider "
+                className="w-full relative Slider"
             >
                 {trendingMovies.map((movie) => (
                     <SwiperSlide key={movie.id}>
