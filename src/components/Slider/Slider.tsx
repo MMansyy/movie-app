@@ -69,16 +69,21 @@ export default function Slider({ text }: SliderProps) {
                     className="w-full Slider"
                 >
                     {trendingMovies.map((movie) => (
-                        <SwiperSlide key={movie.id}
-                            className="mx-6 md:mx-0">
-                            
-                            <img
-                                src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
-                                alt={movie.title}
-                                loading='lazy'
-                                className="rounded-2xl  max-w-52 object-cover transition-transform duration-300 hover:scale-105"
-                            />
+                        <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
+                            <div className="relative w-fit flex flex-col items-center justify-center">
+                                <img
+                                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
+                                    alt={movie.title}
+                                    loading='lazy'
+                                    className="rounded-2xl border-[3px] border-transparent group-hover:border-secondary max-w-52 object-cover transition-all duration-500 group-hover:scale-105"
+                                />
+                                <div className='absolute w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
+                                    <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                </div>
+                                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 group-hover:scale-[103%] transition-all duration-300 rounded-2xl"></div>
+                            </div>
                         </SwiperSlide>
+
                     ))}
                 </Swiper>
             </div>
