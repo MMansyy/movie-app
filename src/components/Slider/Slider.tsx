@@ -55,7 +55,7 @@ export default function Slider() {
                 }}
                 className="w-full relative Slider "
             >
-                {trendingMovies.map((movie, index) => (
+                {trendingMovies.map((movie) => (
                     <SwiperSlide key={movie.id}>
                         <img
                             src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
