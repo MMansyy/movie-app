@@ -1,0 +1,56 @@
+/* Tailwind - خلي الزرارين برا السوايبر */
+
+.Slider .swiper-button-prev,
+.Slider .swiper-button-next {
+    color: white;
+    z-index: 50;
+    height: 100%;
+    width: 60px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.Slider .swiper-button-prev {
+    background: linear-gradient(to right, black, transparent);
+}
+
+.Slider .swiper-button-next {
+    background: linear-gradient(to left, black, transparent);
+}
+
+.Slider .swiper-button-prev:hover,
+.Slider .swiper-button-next:hover {
+    color : rgba(255, 255, 255, 0.5);
+}
+
+.Slider .swiper-button-next::after,
+.Slider .swiper-button-prev::after {
+    font-size: 32px !important;
+}
+
+.Slider .swiper-button-prev {
+    left: -95px;
+    top: 7%
+}
+
+.Slider .swiper-button-next {
+    right: -95px;
+    top: 7%;
+}
+
+
+.Slider {
+    overflow: visible !important;
+}
+
+.Slider .swiper {
+    overflow: visible !important;
+}
+
+.Slider .swiper-wrapper {
+    overflow: visible !important;
+}
+
+.Slider .swiper-slide {
+    overflow: visible !important;
+}
