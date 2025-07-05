@@ -1,10 +1,8 @@
-/* Tailwind - خلي الزرارين برا السوايبر */
-
 .Slider .swiper-button-prev,
 .Slider .swiper-button-next {
     color: white;
     z-index: 50;
-    height: 110%;
+    height: 72%;
     width: 60px;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
@@ -29,13 +27,13 @@
 }
 
 .Slider .swiper-button-prev {
-    left: -41px;
-    top: 7%
+    left: 0;
+    top: 25%
 }
 
 .Slider .swiper-button-next {
-    right: -41px;
-    top: 7%;
+    right: 0;
+    top: 25%;
 }
 
 @media (max-width: 768px) {
@@ -51,6 +49,7 @@
 
 .Slider {
     overflow: visible !important;
+    position: static !important;
 }
 
 .Slider .swiper {

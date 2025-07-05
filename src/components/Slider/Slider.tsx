@@ -7,13 +7,15 @@ import { useEffect, useState } from 'react';
 import type { Movie } from '../MainSlider/MainSlider';
 
 
-
+interface SliderProps {
+    text: string;
+}
 
 async function fetchMovies() {
     return axiosInstance.get('trending/movie/week?language=en-US')
 }
 
-export default function Slider() {
+export default function Slider({ text }: SliderProps) {
 
     const [trendingMovies, settrendingMovies] = useState<Movie[]>([])
 
@@ -33,39 +35,51 @@ export default function Slider() {
 
 
     return (
-        <div className="">
-            <Swiper
-                modules={[Navigation, Mousewheel, FreeMode]}
-                freeMode={true}
-                navigation
-                mousewheel={{ forceToAxis: true }}
-                breakpoints={{
-                    320: {
-                        slidesPerView: 2,
-                        spaceBetween: 120,      
-                    },
-                    768: {
-                        slidesPerView: 3,
-                        spaceBetween: 100,      
-                    },
-                    1024: {
-                        slidesPerView: 6,
-                        spaceBetween: -140,     
-                    },
-                }}
-                className="w-full relative Slider"
-            >
-                {trendingMovies.map((movie) => (
-                    <SwiperSlide key={movie.id}>
-                        <img
-                            src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
-                            alt={movie.title}
-                            loading='lazy'
-                            className="rounded-2xl  max-w-52 object-cover transition-transform duration-300 hover:scale-105"
-                        />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+        <div className='bg-primary overflow-hidden relative'>
+            <div className='container mx-auto px-4 md:px-10 py-10'>
+                <h1 className='text-2xl md:text-3xl font-bold text-left mb-6'>{text}</h1>
+                <Swiper
+                    modules={[Navigation, Mousewheel, FreeMode]}
+                    freeMode={true}
+                    navigation
+                    mousewheel={{ forceToAxis: true }}
+                    breakpoints={{
+                        320: {
+                            slidesPerView: 2,
+                            spaceBetween: 0,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                            spaceBetween: 0,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: -40,
+                        },
+                        1280: {
+                            slidesPerView: 5,
+                            spaceBetween: -50,
+                        },
+                        1536: {
+                            slidesPerView: 6,
+                            spaceBetween: -90,
+
+                        },
+                    }}
+                    className="w-full Slider"
+                >
+                    {trendingMovies.map((movie) => (
+                        <SwiperSlide key={movie.id}>
+                            <img
+                                src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
+                                alt={movie.title}
+                                loading='lazy'
+                                className="rounded-2xl  max-w-52 object-cover transition-transform duration-300 hover:scale-105"
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
         </div>
     );
 }

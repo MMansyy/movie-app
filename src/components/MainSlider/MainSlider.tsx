@@ -58,7 +58,7 @@ export default function MainSlider() {
 
     return (
         <div className='w-full h-[90vh] main-slider relative'>
-            <div className="absolute inset-y-0 right-24 z-10 bottom-1/4 hidden gap-4 md:flex md:flex-col md:items-center md:justify-end">
+            <div className="absolute inset-y-0 right-24 z-10 bottom-1/4 hidden gap-4 lg:flex lg:flex-col lg:items-center lg:justify-end">
                 <span className='text-white font-semibold text-lg'>{totalSlides}</span>
                 <div className="relative h-44 w-1.5 overflow-hidden rounded-full bg-white/30">
                     <div
@@ -100,7 +100,7 @@ export default function MainSlider() {
                                 animate={{ opacity: 1, x: 0 }}
                                 exit={{ opacity: 0, y: 30 }}
                                 transition={{ duration: 0.8 }}
-                                className="absolute bottom-1/3 right-1/3 z-40 hidden md:block">
+                                className="absolute bottom-1/3  right-1/5 2xl:right-1/4 z-40 hidden lg:block">
                                 <a className="group flex items-center gap-4 cursor-pointer">
                                     <span className="grid h-32 w-32 place-content-center rounded-full border-2 border-[#38BDF8] transition-all duration-300 ease-in-out group-hover:bg-[#38BDF8]">
                                         <svg
@@ -124,12 +124,12 @@ export default function MainSlider() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -40, transition: { duration: 0 } }}
                                     transition={{ duration: 0.8 }}
-                                    className='absolute bottom-1/4 md:bottom-1/3 md:left-20 px-4  text-center md:text-left z-20 text-white flex flex-col items-center md:items-start'
+                                    className='absolute bottom-1/4 md:bottom-1/3 md:left-20 px-4  text-center md:text-left z-20 text-white flex flex-col items-center lg:items-start'
                                 >
                                     <h2 className='text-3xl font-bold mb-2'>{slide.title}</h2>
                                     <p className='text-xl  font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{slide.vote_average}</span></span>  | <span>{slide.release_date}</span>   |  <span>{slide.original_language.toUpperCase()}</span>  </p>
                                     <p className='text-lg mb-4 line-clamp-2  md:w-2/5'>{slide.overview}</p>
-                                    <a href={slide.poster_path} className='text-black bg-[#38BDF8] md:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
+                                    <a href={slide.poster_path} className='text-black bg-[#38BDF8] lg:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
                                         <span>
                                             Watch Now
                                         </span>
