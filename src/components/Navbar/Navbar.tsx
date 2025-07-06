@@ -58,7 +58,7 @@ export default function Navbar() {
             )}
 
             <div
-                className={`fixed top-0 right-0 h-screen w-2/3 bg-primary z-[100] p-6 transition-all duration-300 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+                className={`fixed top-0 right-0 h-screen w-2/3 bg-primary/60 backdrop-blur-sm z-[100] p-6 transition-all duration-300 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
                     }`}
             >
                 <div className="flex justify-end mb-4">
