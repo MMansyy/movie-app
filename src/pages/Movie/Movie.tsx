@@ -265,7 +265,7 @@ export default function Movie() {
                                 src={movieImages.posters[0].file_path ? `https://image.tmdb.org/t/p/original${movieImages.posters[0].file_path}` : ''}
                             />
                         </div>
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col items-center justify-center gap-2'>
                             <img className='w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0].file_path}`} alt="" />
                             <p className='font-base font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{Film.vote_average.toString().length > 3 ? Film.vote_average.toString().slice(0, 3) : Film.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{Film.release_date.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.original_language.toUpperCase()}</span>  </p>
                         </div>
