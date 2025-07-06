@@ -1,0 +1,18 @@
+nav .active {
+    color: #38BDF8;
+    /* font-weight: bold; */
+    filter: drop-shadow(0 0 23px #38BDF8);
+}
+
+nav .main li a {
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+    font-weight: 800;
+
+}
+
+nav .main li a:hover  {
+    color: #38BDF8;
+    filter: drop-shadow(0 0 23px #38BDF8);
+
+}

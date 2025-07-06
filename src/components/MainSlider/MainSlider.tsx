@@ -126,8 +126,8 @@ export default function MainSlider() {
                                     transition={{ duration: 0.8 }}
                                     className='absolute bottom-1/4 md:bottom-1/3 md:left-20 px-4  text-center md:text-left z-20 text-white flex flex-col items-center lg:items-start'
                                 >
-                                    <h2 className='text-3xl font-bold mb-2'>{slide.title}</h2>
-                                    <p className='text-xl  font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{slide.vote_average}</span></span>  | <span>{slide.release_date}</span>   |  <span>{slide.original_language.toUpperCase()}</span>  </p>
+                                    <h2 className='text-3xl font-extrabold mb-2'>{slide.title}</h2>
+                                    <p className='text-xl  font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{slide.vote_average.toString().length > 4 ? slide.vote_average.toString().slice(0, 4) : slide.vote_average.toString()}</span></span>  | <span>{slide.release_date}</span>   |  <span>{slide.original_language.toUpperCase()}</span>  </p>
                                     <p className='text-lg mb-4 line-clamp-2  md:w-2/5'>{slide.overview}</p>
                                     <a href={slide.poster_path} className='text-black bg-[#38BDF8] lg:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
                                         <span>

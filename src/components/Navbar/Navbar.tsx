@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import './Navbar.css' // Import your custom CSS for Navbar
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false)
@@ -20,13 +22,13 @@ export default function Navbar() {
         ${scrolled ? 'bg-primary/70 backdrop-blur-sm' : 'bg-transparent'}`}>
                 <div className="container mx-auto px-4 md:px-10 py-5">
                     <div className="relative flex items-center justify-between">
-                        <h1 className="text-2xl md:text-3xl font-bold text-red-400">NOTFLIX</h1>
+                        <h1 className="text-2xl md:text-3xl font-extrabold hover:scale-110 transition-all duration-300 hover:animate-bounce bg-gradient-to-r from-blue-500 via-violet-500  to-red-500 bg-clip-text text-transparent">NOTFLIX</h1>
 
-                        <ul className="hidden md:flex space-x-6 text-2xl absolute left-1/2 -translate-x-1/2">
-                            <li><a href="/" className="text-white">Home</a></li>
-                            <li><a href="/movies" className="text-white">Movies</a></li>
-                            <li><a href="/tv-shows" className="text-white">TV Shows</a></li>
-                            <li><a href="/about" className="text-white">About</a></li>
+                        <ul className="hidden md:flex space-x-6 text-lg absolute left-1/2 -translate-x-1/2 main">
+                            <li><NavLink to="/" className="text-white">Home</NavLink></li>
+                            <li><NavLink to="/movies" className="text-white">Movies</NavLink></li>
+                            <li><NavLink to="/tv-shows" className="text-white">TV Shows</NavLink></li>
+                            <li><NavLink to="/about" className="text-white">About</NavLink></li>
                         </ul>
 
                         <div className="flex items-center gap-3">
@@ -63,10 +65,10 @@ export default function Navbar() {
                     <button onClick={() => setIsMenuOpen(false)} className="text-white text-2xl">✕</button>
                 </div>
                 <ul className="space-y-2 text-white text-xl">
-                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><a href="/">Home</a></li>
-                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><a href="/movies">Movies</a></li>
-                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><a href="/tv-shows">TV Shows</a></li>
-                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><a href="/about">About</a></li>
+                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/">Home</NavLink></li>
+                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/movies">Movies</NavLink></li>
+                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/tv-shows">TV Shows</NavLink></li>
+                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/about">About</NavLink></li>
                 </ul>
             </div>
         </>
