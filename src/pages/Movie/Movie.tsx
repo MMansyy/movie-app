@@ -256,23 +256,23 @@ export default function Movie() {
 
     return (
         <>
-            <div className='w-full h-[90vh] main-slider relative'>
-                <div className='absolute w-2/3 flex justify-between items-center  bottom-6 left-16 z-20'>
-                    <div className='flex items-center gap-8 mb-4'>
-                        <div className='hidden lg:block'>
+            <div className='w-full h-[90vh] main-slider relative overflow-hidden '>
+                <div className='absolute md:w-2/3 w-11/12 left-1/2 -translate-x-1/2 md:left-16 md:translate-x-0 flex flex-col md:flex-row items-center justify-center md:justify-between bottom-6 z-20 text-center'>
+                    <div className='flex items-center  gap-8 mb-4'>
+                        <div className='hidden md:block'>
                             <img
                                 className='w-44 rounded-xl'
                                 src={movieImages.posters[0].file_path ? `https://image.tmdb.org/t/p/original${movieImages.posters[0].file_path}` : ''}
                             />
                         </div>
                         <div className='flex flex-col items-center justify-center gap-2'>
-                            <img className='w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0].file_path}`} alt="" />
-                            <p className='font-base font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{Film.vote_average.toString().length > 3 ? Film.vote_average.toString().slice(0, 3) : Film.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{Film.release_date.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.original_language.toUpperCase()}</span>  </p>
+                            <img className='w-56 md:w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0].file_path}`} alt="" />
+                            <p className='font-base font-semibold mt-2 md:mt-5 mb-5 flex gap-4 truncate'><span className='text-yellow-400'> ★ <span className='text-white'>{Film.vote_average.toString().length > 3 ? Film.vote_average.toString().slice(0, 3) : Film.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{Film.release_date.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.original_language.toUpperCase()}</span>  </p>
                         </div>
                     </div>
                     <div
-                        className="hidden  lg:block">
-                        <a className="group flex items-center relative right-1/2 gap-4 cursor-pointer">
+                        className="hidden relative w-1/3 md:block">
+                        <a className="group flex items-center absolute -top-7 left-0  gap-4 cursor-pointer">
                             <span className="grid h-20 w-20 place-content-center rounded-full  transition-all duration-300 ease-in-out bg-[#38BDF8]">
                                 <svg
                                     className="w-8 h-8 text-black transition-colors duration-300"
@@ -341,8 +341,8 @@ export default function Movie() {
             </div>
             <div className='px-4 lg:px-16 py-16'>
                 <h2 className='text-2xl font-semibold text-white mb-6'>Main cast</h2>
-                
+
             </div>
-            </>
-            )
+        </>
+    )
 }
