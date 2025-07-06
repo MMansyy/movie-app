@@ -5,6 +5,7 @@ import axiosInstance from '../../utils/axios.global';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import type { Movie } from '../MainSlider/MainSlider';
+import { Link } from 'react-router-dom';
 
 
 interface SliderProps {
@@ -70,7 +71,7 @@ export default function Slider({ text }: SliderProps) {
                 >
                     {trendingMovies.map((movie) => (
                         <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
-                            <div className="relative w-fit flex flex-col items-center justify-center">
+                            <Link to={`movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
                                 <img
                                     src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
                                     alt={movie.title}
@@ -81,7 +82,7 @@ export default function Slider({ text }: SliderProps) {
                                     <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
                                 </div>
                                 <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 group-hover:scale-[103%] transition-all duration-300 rounded-2xl"></div>
-                            </div>
+                            </Link>
                         </SwiperSlide>
 
                     ))}

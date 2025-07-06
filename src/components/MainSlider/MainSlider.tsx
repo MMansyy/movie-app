@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, EffectFade, Autoplay } from 'swiper/modules';
+import { Navigation, EffectFade, Autoplay, Mousewheel } from 'swiper/modules';
 import { AnimatePresence, motion } from 'framer-motion';
 import './MainSlider.css'; // استيراد ملف CSS الخاص بالمكون
 import { useEffect, useState } from 'react';
@@ -80,8 +80,9 @@ export default function MainSlider() {
                         delay: 3500,
                         disableOnInteraction: false,
                     }}
-                    modules={[Navigation, EffectFade, Autoplay]}
+                    modules={[Navigation, EffectFade, Autoplay, Mousewheel]}
                     effect='fade'
+                    mousewheel={{ forceToAxis: true }}
                     spaceBetween={0}
                     speed={800}
                 >
@@ -94,6 +95,7 @@ export default function MainSlider() {
                                 className='w-full h-full object-cover'
                             />
                             <div className='absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-primary  to-transparent z-10'></div>
+                            <div className='absolute top-0 left-0 w-full h-1/5 bg-gradient-to-b from-primary  to-transparent z-10'></div>
                             <motion.div
                                 key={activeIndex}
                                 initial={{ opacity: 0, x: 40 }}

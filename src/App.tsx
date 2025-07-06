@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Home from './pages/Home/Home'
 import 'swiper/swiper-bundle.css'
 import './App.css'
+import Movie from './pages/Movie/Movie'
 
 export default function App() {
 
@@ -12,6 +13,10 @@ export default function App() {
     {
       path: '/',
       element: <Home />
+    },
+    {
+      path: '/movie/:movieId',
+      element: <Movie />
     }
   ])
 
