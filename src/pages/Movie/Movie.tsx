@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom'
 import { Autoplay, EffectFade, Mousewheel, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Movie } from '../../components/MainSlider/MainSlider'
+import Avatar from '../../components/Avatar/Avatar'
+import Slider from '../../components/Slider/Slider'
+import Navbar from '../../components/Navbar/Navbar'
 
 interface ImageItem {
     aspect_ratio: number;
@@ -256,8 +259,9 @@ export default function Movie() {
 
     return (
         <>
+            <Navbar />
             <div className='w-full h-[90vh] main-slider relative overflow-hidden '>
-                <div className='absolute md:w-2/3 w-11/12 left-1/2 -translate-x-1/2 md:left-16 md:translate-x-0 flex flex-col md:flex-row items-center justify-center md:justify-between bottom-6 z-20 text-center'>
+                <div className='absolute md:w-2/3 w-full left-1/2 -translate-x-1/2 md:left-16 md:translate-x-0 flex flex-col md:flex-row items-center justify-center md:justify-between bottom-6 z-20 text-center'>
                     <div className='flex items-center  gap-8 mb-4'>
                         <div className='hidden md:block'>
                             <img
@@ -318,7 +322,7 @@ export default function Movie() {
                         ))}
                     </Swiper>}
             </div>
-            <div className='flex w-full flex-col lg:flex-row lg:justify-between lg:items-center px-4 lg:px-16 py-16'>
+            <div className='flex w-full flex-col lg:flex-row lg:justify-between lg:items-center px-4 lg:px-12 py-16'>
                 <div className='flex flex-col self-start gap-4 lg:w-1/2'>
                     <div className='flex flex-col'>
                         <p className='text-gray-400 text-sm'>Original Title</p>
@@ -339,9 +343,17 @@ export default function Movie() {
                         allowFullScreen width={1920} height={1080} className="m-auto aspect-video h-auto max-w-full rounded-xl 2xl:w-2/3" />
                 </div>
             </div>
-            <div className='px-4 lg:px-16 py-16'>
+            <div className='px-4 lg:px-12 py-16'>
                 <h2 className='text-2xl font-semibold text-white mb-6'>Main cast</h2>
-
+                <div className='flex gap-10 overflow-x-auto'>
+                    <Avatar actorName='John whick' imageUrl='8RZLOyYGsoRe9p44q3xin9QkMHv.jpg' />
+                    <Avatar />
+                    <Avatar />
+                    <Avatar />
+                </div>
+            </div>
+            <div className='py-16'>
+                <Slider text='Recommendation' />
             </div>
         </>
     )
