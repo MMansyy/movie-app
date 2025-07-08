@@ -122,7 +122,7 @@ export default function Movie() {
     const [Film, setFilm] = useState<MovieDetails | null>(null)
     const [movieImages, setMovieImages] = useState<MovieImages | null>(null)
     const [movieVideos, setMovieVideos] = useState<MovieVideos[]>([])
-    const [cast, setCast] = useState<CastMember[]>([]);
+    const [cast, setCast] = useState([]);
 
     const { data: movieDetails, isLoading: Loading1 } = useQuery({
         queryKey: ['movieDetails', movieId],
