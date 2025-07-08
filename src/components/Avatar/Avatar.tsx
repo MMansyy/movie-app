@@ -13,7 +13,7 @@ export default function Avatar({ imageUrl, actorName, characterName }: AvatarPro
                 <img src={`https://image.tmdb.org/t/p/original/${imageUrl || 'cCzCClIzIh81Fa79hpW5nXoUsHK.png'}`} alt='Avatar' className='w-full h-full rounded-full object-cover' />
             </div>
             <div className='text-white text-center text-sm mt-2'>
-                <p className='font-semibold truncate text-base'>{actorName || 'Mansy'}</p>
+                <p className='font-semibold truncate text-base'>{actorName.split(' ').slice(0,2).join(' ') || 'Mansy'}</p>
                 <p className='text-gray-400 truncate'>{characterName || 'Jota'}</p>
             </div>
         </div>

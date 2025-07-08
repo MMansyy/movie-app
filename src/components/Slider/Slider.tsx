@@ -10,20 +10,23 @@ import { Link } from 'react-router-dom';
 
 interface SliderProps {
     text: string;
+    url: string;
 }
 
-async function fetchMovies() {
-    return axiosInstance.get('trending/movie/week?language=en-US')
-}
 
-export default function Slider({ text }: SliderProps) {
+
+export default function Slider({ text, url }: SliderProps) {
+    async function fetchMovies() {
+        return axiosInstance.get(url)
+    }
 
     const [trendingMovies, settrendingMovies] = useState<Movie[]>([])
 
     const { data } = useQuery({
-        queryKey: ['trendingMovies'],
+        queryKey: ['trendingMovies', url],
         queryFn: fetchMovies,
         refetchOnWindowFocus: false,
+        enabled: !!url
     })
 
 
@@ -32,13 +35,13 @@ export default function Slider({ text }: SliderProps) {
         if (data) {
             settrendingMovies(data.data.results);
         }
-    }, [data]);
+    }, [data, url]);
 
 
     return (
         <div className='bg-primary overflow-hidden relative'>
             <div className='container mx-auto px-4 md:px-10 py-10'>
-                <h1 className='text-xl md:text-2xl font-bold text-left mb-6'>{text}</h1>
+                <h1 className='text-xl md:text-3xl font-bold text-left mb-6'>{text}</h1>
                 <Swiper
                     modules={[Navigation, Mousewheel, FreeMode]}
                     freeMode={true}
@@ -71,12 +74,12 @@ export default function Slider({ text }: SliderProps) {
                 >
                     {trendingMovies.map((movie) => (
                         <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
-                            <Link to={`movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
+                            <Link to={`/movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
                                 <img
                                     src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
                                     alt={movie.title}
                                     loading='lazy'
-                                    className="rounded-2xl border-[3px] border-transparent group-hover:border-secondary max-w-52 object-cover transition-all duration-500 group-hover:scale-105"
+                                    className="rounded-2xl border-[3px] border-transparent group-hover:border-secondary max-w-52 min-h-[309px] object-cover transition-all duration-500 group-hover:scale-105"
                                 />
                                 <div className='absolute w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
                                     <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>

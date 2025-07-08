@@ -1,12 +1,15 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Autoplay, EffectFade, Mousewheel, Navigation } from 'swiper/modules'
+import { Autoplay, EffectFade, FreeMode, Mousewheel, Navigation } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import type { Movie } from '../../components/MainSlider/MainSlider'
 import Avatar from '../../components/Avatar/Avatar'
 import Slider from '../../components/Slider/Slider'
 import Navbar from '../../components/Navbar/Navbar'
+import { useQuery } from '@tanstack/react-query'
+import axiosInstance from '../../utils/axios.global'
+import Loader from '../../components/Loader/Loader'
 
 interface ImageItem {
     aspect_ratio: number;
@@ -81,91 +84,6 @@ interface MovieDetails {
 }
 
 
-
-const movieImages: MovieImages = {
-    id: 12345,
-    backdrops: [
-        {
-            "aspect_ratio": 1.778,
-            "height": 2160,
-            "iso_639_1": "en",
-            "file_path": "/q40cm0yiEgsTZNYZpsUULOKzHk5.jpg",
-            "vote_average": 3.334,
-            "vote_count": 1,
-            "width": 3840
-        },
-        {
-            "aspect_ratio": 1.778,
-            "height": 2160,
-            "iso_639_1": "en",
-            "file_path": "/1B7CXnNQbIqPMvYAZrvwEv9563R.jpg",
-            "vote_average": 2.542,
-            "vote_count": 4,
-            "width": 3840
-        },
-        {
-            "aspect_ratio": 1.778,
-            "height": 2160,
-            "iso_639_1": "en",
-            "file_path": "/rIeaf2NLSlw11wT8IoBocHhid1y.jpg",
-            "vote_average": 2.278,
-            "vote_count": 3,
-            "width": 3840
-        },
-        {
-            "aspect_ratio": 1.778,
-            "height": 1080,
-            "iso_639_1": "en",
-            "file_path": "/yUESyc41631HWy5ppT08fYpJKiZ.jpg",
-            "vote_average": 1.75,
-            "vote_count": 2,
-            "width": 1920
-        },
-        {
-            "aspect_ratio": 0.667,
-            "height": 3000,
-            "iso_639_1": "en",
-            "file_path": "/160vKhMhE7K8wiF7oTAwe3tELsH.jpg",
-            "vote_average": 1.222,
-            "vote_count": 3,
-            "width": 2000
-        },
-        {
-            "aspect_ratio": 0.674,
-            "height": 1230,
-            "iso_639_1": "en",
-            "file_path": "/17AjXbJQ12ujLXmxZ2yyhLC92v8.jpg",
-            "vote_average": 1.222,
-            "vote_count": 3,
-            "width": 829
-        },
-    ],
-    logos: [
-        {
-            "aspect_ratio": 2.214,
-            "height": 1285,
-            "iso_639_1": "en",
-            "file_path": "/jdAWFEuysoBGkzB1MOnHr9qqqqP.png",
-            "vote_average": 8.034,
-            "vote_count": 5,
-            "width": 2845
-        }
-    ],
-    posters: [
-        {
-            "aspect_ratio": 0.667,
-            "height": 3000,
-            "iso_639_1": "en",
-            "file_path": "/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg",
-            "vote_average": 6.346,
-            "vote_count": 13,
-            "width": 2000
-        }
-    ]
-}
-
-
-
 interface MovieVideos {
     iso_639_1: string;
     iso_3166_1: string;
@@ -180,98 +98,113 @@ interface MovieVideos {
 }
 
 
-const Film: MovieDetails = {
-    adult: false,
-    backdrop_path: "/sItIskd5xpiE64bBWYwZintkGf3.jpg",
-    belongs_to_collection: {
-        id: 1494663,
-        name: "Ballerina Collection",
-        poster_path: "/xzAyYTHqWtLmqtscUr8cZqaP7lu.jpg",
-        backdrop_path: null
-    },
-    budget: 90000000,
-    genres: [
-        { id: 28, name: "Action" },
-        { id: 53, name: "Thriller" },
-        { id: 80, name: "Crime" }
-    ],
-    homepage: "https://johnwick.movie/film/ballerina",
-    id: 541671,
-    imdb_id: "tt7181546",
-    origin_country: ["US"],
-    original_language: "en",
-    original_title: "Ballerina",
-    overview: "Taking place during the events of John Wick: Chapter 3 – Parabellum, Eve Macarro begins her training in the assassin traditions of the Ruska Roma.",
-    popularity: 759.5684,
-    poster_path: "/2VUmvqsHb6cEtdfscEA6fqqVzLg.jpg",
-    production_companies: [
-        {
-            id: 3528,
-            logo_path: "/cCzCClIzIh81Fa79hpW5nXoUsHK.png",
-            name: "Thunder Road",
-            origin_country: "US"
-        },
-        {
-            id: 23008,
-            logo_path: "/5SarYupipdiejsEqUkwu1SpYfru.png",
-            name: "87Eleven",
-            origin_country: "US"
-        },
-        {
-            id: 1632,
-            logo_path: "/cisLn1YAUuptXVBa0xjq7ST9cH0.png",
-            name: "Lionsgate",
-            origin_country: "US"
-        }
-    ],
-    production_countries: [
-        {
-            iso_3166_1: "US",
-            name: "United States of America"
-        }
-    ],
-    release_date: "2025-06-04",
-    revenue: 100000000,
-    runtime: 125,
-    spoken_languages: [
-        {
-            english_name: "English",
-            iso_639_1: "en",
-            name: "English"
-        }
-    ],
-    status: "Released",
-    tagline: "Vengeance has a new face.",
-    title: "Ballerina",
-    video: false,
-    vote_average: 7.338,
-    vote_count: 663
-};
 
+async function fetchMovieDetails(movieId: string) {
+    return await axiosInstance(`https://api.themoviedb.org/3/movie/${movieId}`)
+}
 
+async function fetchMovieImages(movieId: string) {
+    return await axiosInstance(`https://api.themoviedb.org/3/movie/${movieId}/images?language=en`)
+}
 
+async function fetchMovieVideos(movieId: string) {
+    return await axiosInstance(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`)
+}
+
+async function fetchMovieCast(movieId: string) {
+    return await axiosInstance(`https://api.themoviedb.org/3/movie/${movieId}/credits?language=en-US`)
+}
 
 
 export default function Movie() {
     const { movieId } = useParams<{ movieId: string }>()
 
+    const [Film, setFilm] = useState<MovieDetails | null>(null)
+    const [movieImages, setMovieImages] = useState<MovieImages | null>(null)
+    const [movieVideos, setMovieVideos] = useState<MovieVideos[]>([])
+    const [cast, setCast] = useState<CastMember[]>([]);
+
+    const { data: movieDetails, isLoading: Loading1 } = useQuery({
+        queryKey: ['movieDetails', movieId],
+        queryFn: () => fetchMovieDetails(movieId || ''),
+        refetchOnWindowFocus: false,
+        enabled: !!movieId
+    })
+
+    const { data: images, isLoading: Loading2 } = useQuery({
+        queryKey: ['movieImages', movieId],
+        queryFn: () => fetchMovieImages(movieId || ''),
+        refetchOnWindowFocus: false,
+        enabled: !!movieId
+    })
+
+    const { data: videos, isLoading: Loading3 } = useQuery({
+        queryKey: ['movieVideos', movieId],
+        queryFn: () => fetchMovieVideos(movieId || ''),
+        refetchOnWindowFocus: false,
+        enabled: !!movieId
+    })
+
+
+    const { data: castData, isLoading: Loading4 } = useQuery({
+        queryKey: ['movieCast', movieId],
+        queryFn: () => fetchMovieCast(movieId || ''),
+        refetchOnWindowFocus: false,
+        enabled: !!movieId,
+    });
+
+
+
+    useEffect(() => {
+        if (movieDetails) {
+            setFilm(movieDetails?.data as MovieDetails);
+        }
+    }, [movieDetails, movieId]);
+
+    useEffect(() => {
+        if (images) {
+            setMovieImages(images?.data as MovieImages);
+        }
+    }, [images, movieId]);
+
+    useEffect(() => {
+        if (videos) {
+            setMovieVideos(videos?.data?.results as MovieVideos[]);
+        }
+    }, [videos]);
+
+    useEffect(() => {
+        if (castData) {
+            setCast(castData.data.cast.slice(0, 20)); // أول 20 ممثل
+        }
+    }, [castData]);
+
+
+
+    useEffect(() => {
+        setFilm(null);
+        setMovieImages(null);
+        setMovieVideos([]);
+        window.scroll(0, 0)
+    }, [movieId]);
+
 
 
     return (
         <>
-            <Navbar />
             <div className='w-full h-[90vh] main-slider relative overflow-hidden '>
                 <div className='absolute md:w-2/3 w-full left-1/2 -translate-x-1/2 md:left-16 md:translate-x-0 flex flex-col md:flex-row items-center justify-center md:justify-between bottom-6 z-20 text-center'>
                     <div className='flex items-center  gap-8 mb-4'>
                         <div className='hidden md:block'>
                             <img
                                 className='w-44 rounded-xl'
-                                src={movieImages.posters[0].file_path ? `https://image.tmdb.org/t/p/original${movieImages.posters[0].file_path}` : ''}
+                                src={movieImages?.posters[0]?.file_path ? `https://image.tmdb.org/t/p/original${movieImages?.posters[0]?.file_path}` : `https://image.tmdb.org/t/p/original${Film?.poster_path}`}
+                                alt={Film?.title}
                             />
                         </div>
                         <div className='flex flex-col items-center justify-center gap-2'>
-                            <img className='w-56 md:w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0].file_path}`} alt="" />
-                            <p className='font-base font-semibold mt-2 md:mt-5 mb-5 flex gap-4 truncate'><span className='text-yellow-400'> ★ <span className='text-white'>{Film.vote_average.toString().length > 3 ? Film.vote_average.toString().slice(0, 3) : Film.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{Film.release_date.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film.original_language.toUpperCase()}</span>  </p>
+                            {movieImages?.logos[0]?.file_path ? <img className='w-56 md:w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0]?.file_path}`} alt="" /> : <h1 className='text-4xl md:text-4xl md:self-start font-bold text-white'>{Film?.title}</h1>}
+                            <p className='font-base font-semibold mt-2 md:mt-5 mb-5 flex gap-4 truncate'><span className='text-yellow-400'> ★ <span className='text-white'>{Film?.vote_average.toString().length > 3 ? Film?.vote_average.toString().slice(0, 3) : Film?.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{Film?.release_date.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film?.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>   <span>{Film?.original_language.toUpperCase()}</span>  </p>
                         </div>
                     </div>
                     <div
@@ -293,7 +226,7 @@ export default function Movie() {
                         </a>
                     </div>
                 </div>
-                {movieImages?.backdrops.length > 0 &&
+                {movieImages?.backdrops?.length > 0 &&
                     <Swiper
                         className='w-full h-full'
                         navigation={true}
@@ -310,9 +243,9 @@ export default function Movie() {
                     >
                         {movieImages?.backdrops.map((slide) => (
                             <>
-                                <SwiperSlide key={slide.iso_639_1} className='relative'>
+                                <SwiperSlide key={slide?.iso_639_1} className='relative'>
                                     <img
-                                        src={slide.file_path ? `https://image.tmdb.org/t/p/original${slide.file_path}` : ''}
+                                        src={slide?.file_path ? `https://image.tmdb.org/t/p/original${slide?.file_path}` : ''}
                                         className='w-full h-full object-cover'
                                     />
                                     <div className='absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-primary  to-transparent z-10'></div>
@@ -326,35 +259,89 @@ export default function Movie() {
                 <div className='flex flex-col self-start gap-4 lg:w-1/2'>
                     <div className='flex flex-col'>
                         <p className='text-gray-400 text-sm'>Original Title</p>
-                        <h1 className='text-2xl  font-bold text-white'>{Film.title}</h1>
+                        <h1 className='text-3xl  font-bold text-white'>{Film?.title}</h1>
                     </div>
                     <div className='flex flex-col gap-2'>
                         <p className='text-gray-400 text-sm'>Overview</p>
-                        <p className='text-gray-300 text-md '>{Film.overview}</p>
+                        <p className='text-gray-300 text-md '>{Film?.overview}</p>
                     </div>
                     <div className='flex gap-4 mt-2'>
-                        {Film.genres.map((genre) => (
-                            <span key={genre.id} className='bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-xs font-semibold'>{genre.name}</span>
+                        {Film?.genres.map((genre) => (
+                            <span key={genre?.id} className='bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-xs font-semibold'>{genre.name}</span>
                         ))}
                     </div>
                 </div>
                 <div className="lg:w-1/2 mt-8 lg:mt-0">
-                    <iframe title="Final Trailer" rel="preconnect" src="https://www.youtube-nocookie.com/embed/b9Rr9ygb-ac"
-                        allowFullScreen width={1920} height={1080} className="m-auto aspect-video h-auto max-w-full rounded-xl 2xl:w-2/3" />
+                    {movieVideos?.length > 0 && (
+                        <iframe
+                            title="Final Trailer"
+                            rel="preconnect"
+                            src={`https://www.youtube-nocookie.com/embed/${movieVideos.find(
+                                (video) =>
+                                    (video.type === 'Trailer' || video.type === 'Teaser') &&
+                                    video.site === 'YouTube' &&
+                                    video.official === true
+                            )?.key || movieVideos[0]?.key
+                                }?autoplay=0&mute=1&controls=1&loop=1`}
+                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            width={1920}
+                            height={1080}
+                            className="m-auto aspect-video h-auto max-w-full rounded-xl 2xl:w-2/3"
+                        />
+                    )}
+
+
                 </div>
             </div>
-            <div className='px-4 lg:px-12 py-16'>
-                <h2 className='text-2xl font-semibold text-white mb-6'>Main cast</h2>
-                <div className='flex gap-10 overflow-x-auto'>
-                    <Avatar actorName='John whick' imageUrl='8RZLOyYGsoRe9p44q3xin9QkMHv.jpg' />
-                    <Avatar />
-                    <Avatar />
-                    <Avatar />
-                </div>
+            <div className='px-4 lg:px-12 py-16 overflow-hidden relative'>
+                <h2 className='text-3xl font-semibold text-white mb-6'>Main cast</h2>
+                <Swiper
+                    modules={[Navigation, Mousewheel, FreeMode]}
+                    freeMode={true}
+                    navigation
+                    spaceBetween={0}
+                    mousewheel={{ forceToAxis: true }}
+                    breakpoints={{
+                        320: {
+                            slidesPerView: 2,
+                            // spaceBetween: 0,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                            // spaceBetween: 0,
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            // spaceBetween: 0,
+                        },
+                        1280: {
+                            slidesPerView: 5,
+                            // spaceBetween: 0,
+                        },
+                        1536: {
+                            slidesPerView: 6,
+                            // spaceBetween: 0,
+                        },
+                    }}
+                    className="w-full Slider"
+                >
+                    {cast.map((actor) => (
+                        <SwiperSlide key={actor.id}>
+                            <Avatar
+                                actorName={actor.name}
+                                characterName={actor.character}
+                                imageUrl={actor.profile_path}
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+
             </div>
             <div className='py-16'>
-                <Slider text='Recommendation' />
+                <Slider text='Recommendation' url={`movie/${movieId}/recommendations`} />
             </div>
+            {(Loading1 || Loading2 || Loading3 || Loading4) && <Loader />}
         </>
     )
 }

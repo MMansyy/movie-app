@@ -36,21 +36,25 @@
     top: 25%;
 }
 
-
-
-.Slider {
-    overflow: visible !important;
-    position: static !important;
+.Slider .swiper-button-prev.swiper-button-disabled,
+.Slider .swiper-button-next.swiper-button-disabled {
+    opacity: 0;
+    pointer-events: none;
 }
 
-.Slider .swiper {
-    overflow: visible !important;
-}
+    .Slider {
+        overflow: visible !important;
+        position: static !important;
+    }
 
-.Slider .swiper-wrapper {
-    overflow: visible !important;
-}
+    .Slider .swiper {
+        overflow: visible !important;
+    }
 
-.Slider .swiper-slide {
-    overflow: visible !important;
-}
+    .Slider .swiper-wrapper {
+        overflow: visible !important;
+    }
+
+    .Slider .swiper-slide {
+        overflow: visible !important;
+    }
