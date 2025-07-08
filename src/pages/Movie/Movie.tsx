@@ -171,13 +171,13 @@ export default function Movie() {
         if (videos) {
             setMovieVideos(videos?.data?.results as MovieVideos[]);
         }
-    }, [videos]);
+    }, [videos, movieId]);
 
     useEffect(() => {
         if (castData) {
-            setCast(castData.data.cast.slice(0, 20)); // أول 20 ممثل
+            setCast(castData.data.cast.slice(0, 20));
         }
-    }, [castData]);
+    }, [castData, movieId]);
 
 
 
@@ -187,6 +187,10 @@ export default function Movie() {
         setMovieVideos([]);
         window.scroll(0, 0)
     }, [movieId]);
+
+    useEffect(() => {
+        document.title = Film ? `${Film?.title} - Movie App` : 'Movie App';
+    }, [Film]);
 
 
 
@@ -281,7 +285,7 @@ export default function Movie() {
                                     (video.type === 'Trailer' || video.type === 'Teaser') &&
                                     video.site === 'YouTube' &&
                                     video.official === true
-                            )?.key || movieVideos[0]?.key
+                            )?.key || movieVideos[movieVideos.length - 1]?.key
                                 }?autoplay=0&mute=1&controls=1&loop=1`}
                             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
