@@ -13,6 +13,7 @@ export default function Home() {
         <div className=''>
             <MainSlider />
             <Slider text='Trendig this week' url='trending/movie/week?language=en-US' />
+            <Slider text='Top 10 Movies Today' url='trending/movie/day?language=en-US' type='top10' />
         </div>
     )
 }

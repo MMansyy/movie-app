@@ -104,7 +104,7 @@ async function fetchMovieDetails(movieId: string) {
 }
 
 async function fetchMovieImages(movieId: string) {
-    return await axiosInstance(`https://api.themoviedb.org/3/movie/${movieId}/images?language=en`)
+    return await axiosInstance(`https://api.themoviedb.org/3/movie/${movieId}/images?language=en&include_image_language=en,null`)
 }
 
 async function fetchMovieVideos(movieId: string) {
@@ -230,7 +230,7 @@ export default function Movie() {
                         </a>
                     </div>
                 </div>
-                {movieImages?.backdrops?.length > 0 &&
+                {movieImages?.backdrops &&
                     <Swiper
                         className='w-full h-full'
                         navigation={true}
@@ -245,6 +245,16 @@ export default function Movie() {
                         spaceBetween={0}
                         speed={800}
                     >
+                        {movieImages?.backdrops.length === 0 &&
+                            <SwiperSlide className='relative'>
+                                <img
+                                    src={Film?.backdrop_path ? `https://image.tmdb.org/t/p/original${Film?.backdrop_path}` : ''}
+                                    className='w-full h-full object-cover'
+                                />
+                                <div className='absolute bottom-0 left-0 w-full h-full bg-gradient-to-t from-primary  to-transparent z-10'></div>
+                                <div className='absolute top-0 left-0 w-full h-1/5 bg-gradient-to-b from-primary  to-transparent z-10'></div>
+                            </SwiperSlide>
+                        }
                         {movieImages?.backdrops.map((slide) => (
                             <>
                                 <SwiperSlide key={slide?.iso_639_1} className='relative'>

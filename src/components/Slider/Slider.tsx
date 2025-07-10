@@ -11,11 +11,12 @@ import { Link } from 'react-router-dom';
 interface SliderProps {
     text: string;
     url: string;
+    type?: 'top10'
 }
 
 
 
-export default function Slider({ text, url }: SliderProps) {
+export default function Slider({ text, url, type }: SliderProps) {
     async function fetchMovies() {
         return axiosInstance.get(url)
     }
@@ -41,7 +42,39 @@ export default function Slider({ text, url }: SliderProps) {
     return (
         <div className='bg-primary overflow-hidden relative'>
             <div className='container mx-auto px-4 md:px-10 py-10'>
-                <h1 className='text-3xl md:text-3xl font-bold text-left mb-6'>{text}</h1>
+                {type !== 'top10' && <h1 className='text-3xl md:text-3xl font-bold text-left mb-6'>{text}</h1>}
+                {type === 'top10' &&
+                    <div className="flex items-center justify-between gap-8 px-4 mb-7 sm:px-7 max-sm:flex-col">
+
+                        <div className="ml-4 flex items-center justify-center gap-4 max-sm:flex-col">
+
+                            <h3 className="text-8xl font-bold  lg:ml-3.5 lg:text-9xl flex">
+                                {['T', 'O', 'P', '1', '0'].map((char, idx) => (
+                                    <span
+                                        key={idx}
+                                        className={`relative  text-outline  ${idx === 4 ? 'lg:-ml-8 -ml-2.5' : idx === 3 ? 'ml-0 ' : 'lg:-ml-7 -ml-3'
+                                            }`}
+                                    >
+                                        {char}
+                                    </span>
+                                ))}
+                            </h3>
+
+                            <div className="flex flex-col gap-2 max-sm:text-center">
+                                <h3 className="text-xl font-semibold uppercase tracking-[10px]">Movies</h3>
+                                <h3 className="text-xl font-semibold tracking-[10px]">TODAY</h3>
+                            </div>
+                        </div>
+
+                        <div>
+                            <select className="px-3 py-2  rounded-full w-max max-w-xs">
+                                <option value="movie">Movies</option>
+                                <option value="tv">Series</option>
+                            </select>
+                        </div>
+
+                    </div>
+                }
                 <Swiper
                     modules={[Navigation, Mousewheel, FreeMode]}
                     freeMode={true}
@@ -72,7 +105,7 @@ export default function Slider({ text, url }: SliderProps) {
                     }}
                     className="w-full Slider"
                 >
-                    {trendingMovies.map((movie) => (
+                    {type !== 'top10' && trendingMovies.map((movie) => (
                         <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
                             <Link to={`/movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
                                 <img
@@ -87,7 +120,34 @@ export default function Slider({ text, url }: SliderProps) {
                                 <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 group-hover:scale-[103%] transition-all duration-300 rounded-2xl"></div>
                             </Link>
                         </SwiperSlide>
+                    ))}
+                    {type === 'top10' && trendingMovies.slice(0, 10).map((movie, index) => (
+                        <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
+                            <Link to={`/movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
+                                <div className="flex group items-baseline">
+                                    <p className="-z-10 translate-x-6 text-8xl -translate-y-1 font-bold sm:text-9xl group-hover:translate-x-3 group-hover:scale-110 group-hover:text-secondary transition-all duration-300 ease-in-out">
+                                        {index === 9 ? <>
+                                            <span className="text-outline text-shadow-xs">1</span>
+                                            <span className="text-outline text-shadow-xs -ml-6">0</span>
+                                        </>
+                                            :
+                                            <span className="text-outline text-shadow-xs">{index + 1}</span>
 
+                                        }
+                                    </p>
+                                    <div className=' relative'>
+                                        <img
+                                            className="object-cover transition-all duration-300 ease-in-out group w-[150px] h-[225px] rounded-xl group-hover:ring-2 ring-secondary shadow-[-5px_10px_20px_0px_rgba(0,0,0,0)] group-hover:shadow-[-5px_10px_20px_6px_rgba(0,0,0,1)]"
+                                            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" />
+                                        <div className='absolute top-1/2 left-1/2 -translate-1/2  w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
+                                            <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                        </div>
+                                        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50  transition-all duration-300 rounded-2xl"></div>
+                                    </div>
+                                </div>
+
+                            </Link>
+                        </SwiperSlide>
                     ))}
                 </Swiper>
             </div>

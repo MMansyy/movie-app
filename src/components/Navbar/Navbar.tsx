@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import './Navbar.css' // Import your custom CSS for Navbar
 
 export default function Navbar() {
@@ -22,8 +22,9 @@ export default function Navbar() {
         ${scrolled ? 'bg-primary/70 backdrop-blur-sm' : 'bg-transparent'}`}>
                 <div className="container mx-auto px-4 md:px-10 py-5">
                     <div className="relative flex items-center justify-between">
-                        <h1 className="text-2xl md:text-3xl font-extrabold hover:scale-110 transition-all duration-300 hover:animate-bounce bg-gradient-to-r from-blue-500 via-violet-500  to-red-500 bg-clip-text text-transparent">NOTFLIX</h1>
-
+                        <Link to="/" className="flex items-center gap-2">
+                            <h1 className="text-2xl md:text-3xl font-extrabold hover:scale-110 transition-all duration-300 hover:animate-bounce bg-gradient-to-r from-blue-500 via-violet-500  to-red-500 bg-clip-text text-transparent">NOTFLIX</h1>
+                        </Link>
                         <ul className="hidden md:flex space-x-6 text-lg absolute left-1/2 -translate-x-1/2 main">
                             <li><NavLink to="/" className="text-white">Home</NavLink></li>
                             <li><NavLink to="/movies" className="text-white">Movies</NavLink></li>
