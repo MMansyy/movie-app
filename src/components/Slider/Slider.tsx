@@ -3,7 +3,7 @@ import { Navigation, Mousewheel, FreeMode } from 'swiper/modules';
 import './Slider.css';
 import axiosInstance from '../../utils/axios.global';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Movie } from '../MainSlider/MainSlider';
 import { Link } from 'react-router-dom';
 
@@ -18,13 +18,18 @@ interface SliderProps {
 
 export default function Slider({ text, url, type }: SliderProps) {
     async function fetchMovies() {
+        if (category === 'tv') {
+            return axiosInstance.get(`trending/tv/week?language=en-US`);
+        }
         return axiosInstance.get(url)
     }
 
     const [trendingMovies, settrendingMovies] = useState<Movie[]>([])
+    const [category, setCategory] = useState<'movie' | 'tv'>('movie');
+    const categoryRef = useRef<HTMLSelectElement>(undefined);
 
     const { data } = useQuery({
-        queryKey: ['trendingMovies', url],
+        queryKey: ['trendingMovies', url, category],
         queryFn: fetchMovies,
         refetchOnWindowFocus: false,
         enabled: !!url
@@ -61,13 +66,19 @@ export default function Slider({ text, url, type }: SliderProps) {
                             </h3>
 
                             <div className="flex flex-col gap-2 max-sm:text-center">
-                                <h3 className="text-xl font-semibold uppercase tracking-[10px]">Movies</h3>
+                                <h3 className="text-xl font-semibold uppercase tracking-[10px]">{category === 'movie' ? 'Movies' : 'TV SHOWS'}</h3>
                                 <h3 className="text-xl font-semibold tracking-[10px]">TODAY</h3>
                             </div>
                         </div>
 
                         <div>
-                            <select className="px-3 py-2  rounded-full w-max max-w-xs">
+                            <select
+                                ref={categoryRef}
+                                onChange={() => {
+                                    setCategory(categoryRef?.current?.value as 'movie' | 'tv');
+                                }}
+                                value={category}
+                                className="px-3 py-2  rounded-full w-max max-w-xs">
                                 <option value="movie">Movies</option>
                                 <option value="tv">Series</option>
                             </select>
@@ -125,7 +136,7 @@ export default function Slider({ text, url, type }: SliderProps) {
                         <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
                             <Link to={`/movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
                                 <div className="flex group items-baseline">
-                                    <p className="-z-10 translate-x-6 text-8xl -translate-y-1 font-bold sm:text-9xl group-hover:translate-x-3 group-hover:scale-110 group-hover:text-secondary transition-all duration-300 ease-in-out">
+                                    <p className="-z-10 translate-x-6 text-8xl -translate-y-1 font-bold sm:text-9xl group-hover:translate-x-2 group-hover:scale-110 group-hover:text-secondary transition-all duration-300 ease-in-out">
                                         {index === 9 ? <>
                                             <span className="text-outline text-shadow-xs">1</span>
                                             <span className="text-outline text-shadow-xs -ml-6">0</span>

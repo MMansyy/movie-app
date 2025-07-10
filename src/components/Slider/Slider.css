@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 .Slider .swiper-button-prev,
 .Slider .swiper-button-next {
     color: white;
