@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Autoplay, EffectFade, FreeMode, Mousewheel, Navigation } from 'swiper/modules'
@@ -298,7 +299,7 @@ export default function Movie({ type }: { type?: 'movie' | 'tv' }) {
     }, [movieId]);
 
     useEffect(() => {
-        document.title = Film ? `${Film?.title || Film?.name} - Movie App` : 'Movie App';
+        document.title = Film ? `${(Film as MovieDetails)?.title || (Film as TVShow)?.name} - Movie App` : 'Movie App';
     }, [Film]);
 
 
@@ -312,12 +313,12 @@ export default function Movie({ type }: { type?: 'movie' | 'tv' }) {
                             <img
                                 className='w-44 rounded-xl'
                                 src={movieImages?.posters[0]?.file_path ? `https://image.tmdb.org/t/p/original${movieImages?.posters[0]?.file_path}` : `https://image.tmdb.org/t/p/original${Film?.poster_path}`}
-                                alt={Film?.title || Film?.name}
+                                alt={(Film as MovieDetails)?.title || (Film as TVShow)?.name}
                             />
                         </div>
                         <div className='flex flex-col items-center justify-center gap-2'>
-                            {movieImages?.logos[0]?.file_path ? <img className='w-56 md:w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0]?.file_path}`} alt="" /> : <h1 className='text-4xl md:text-4xl md:self-start font-bold text-white'>{Film?.title}</h1>}
-                            <p className='font-base font-semibold mt-2 md:mt-5 mb-5 flex gap-4 truncate'><span className='text-yellow-400'> ★ <span className='text-white'>{Film?.vote_average.toString().length > 3 ? Film?.vote_average.toString().slice(0, 3) : Film?.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{Film?.release_date?.split('-')[0] || Film?.first_air_date?.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>  {type === 'movie' && <><span> {Film?.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div></>} <span>{Film?.original_language.toUpperCase()}</span>  </p>
+                            {movieImages?.logos[0]?.file_path ? <img className='w-56 md:w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0]?.file_path}`} alt="" /> : <h1 className='text-4xl md:text-4xl md:self-start font-bold text-white'>{(Film as MovieDetails)?.title}</h1>}
+                            <p className='font-base font-semibold mt-2 md:mt-5 mb-5 flex gap-4 truncate'><span className='text-yellow-400'> ★ <span className='text-white'>{Film?.vote_average.toString().length > 3 ? Film?.vote_average.toString().slice(0, 3) : Film?.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{(Film as MovieDetails)?.release_date?.split('-')[0] || (Film as TVShow)?.first_air_date?.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>  {type === 'movie' && <><span> {(Film as MovieDetails)?.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div></>} <span>{Film?.original_language.toUpperCase()}</span>  </p>
                         </div>
                     </div>
                     <div
@@ -382,7 +383,7 @@ export default function Movie({ type }: { type?: 'movie' | 'tv' }) {
                 <div className='flex flex-col self-start gap-4 lg:w-1/2'>
                     <div className='flex flex-col'>
                         <p className='text-gray-400 text-sm'>Original Title</p>
-                        <h1 className='text-3xl  font-bold text-white'>{Film?.title || Film?.name}</h1>
+                        <h1 className='text-3xl  font-bold text-white'>{(Film as MovieDetails)?.title || (Film as TVShow)?.name}</h1>
                     </div>
                     <div className='flex flex-col gap-2'>
                         <p className='text-gray-400 text-sm'>Overview</p>
