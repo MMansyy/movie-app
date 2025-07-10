@@ -12,11 +12,12 @@ interface SliderProps {
     text: string;
     url: string;
     type?: 'top10'
+    path?: 'movie' | 'tv';
 }
 
 
 
-export default function Slider({ text, url, type }: SliderProps) {
+export default function Slider({ text, url, type, path }: SliderProps) {
     async function fetchMovies() {
         if (category === 'tv') {
             return axiosInstance.get(`trending/tv/week?language=en-US`);
@@ -118,7 +119,7 @@ export default function Slider({ text, url, type }: SliderProps) {
                 >
                     {type !== 'top10' && trendingMovies.map((movie) => (
                         <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
-                            <Link to={`/movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
+                            <Link to={`/${path ? 'series' : 'movie'}/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
                                 <img
                                     src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
                                     alt={movie.title}
@@ -134,7 +135,7 @@ export default function Slider({ text, url, type }: SliderProps) {
                     ))}
                     {type === 'top10' && trendingMovies.slice(0, 10).map((movie, index) => (
                         <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
-                            <Link to={`/movie/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
+                            <Link to={`/${category === 'movie' ? 'movie' : 'series'}/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
                                 <div className="flex group items-baseline">
                                     <p className="-z-10 translate-x-6 text-8xl -translate-y-1 font-bold sm:text-9xl group-hover:translate-x-2 group-hover:scale-110 group-hover:text-secondary transition-all duration-300 ease-in-out">
                                         {index === 9 ? <>

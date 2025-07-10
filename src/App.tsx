@@ -21,7 +21,11 @@ export default function App() {
         },
         {
           path: '/movie/:movieId',
-          element: <Movie />
+          element: <Movie type='movie' />
+        },
+        {
+          path: '/series/:movieId',
+          element: <Movie type='tv' />
         }
       ]
     }
