@@ -46,9 +46,9 @@ export default function Slider({ text, url, type }: SliderProps) {
                 {type === 'top10' &&
                     <div className="flex items-center justify-between gap-8 px-4 mb-7 sm:px-7 max-sm:flex-col">
 
-                        <div className="ml-4 flex items-center justify-center gap-4 max-sm:flex-col">
+                        <div className=" flex items-center justify-center gap-4 max-sm:flex-col">
 
-                            <h3 className="text-8xl font-bold  lg:ml-3.5 lg:text-9xl flex">
+                            <h3 className="text-8xl font-bold   lg:text-9xl flex">
                                 {['T', 'O', 'P', '1', '0'].map((char, idx) => (
                                     <span
                                         key={idx}
