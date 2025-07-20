@@ -71,12 +71,12 @@ export default function Gener() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-10'>
+                        className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10 mt-10'>
                         {MovieData?.data?.results?.map((movie: any) => (
                             <Link
                                 to={`/movie/${movie.id}`}
                                 key={movie.id}
-                                className='relative group w-72 h-40 hover:scale-105 transition-all duration-300'
+                                className='relative group w-72 mx-auto h-40 hover:scale-105 transition-all duration-300'
                             >
                                 <img
                                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
@@ -111,12 +111,12 @@ export default function Gener() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 mt-10'>
+                        className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10 mt-10'>
                         {SeriesData?.data?.results?.map((movie: any) => (
                             <Link
                                 to={`/series/${movie.id}`}
                                 key={movie.id}
-                                className='relative group w-72 h-40 hover:scale-105 transition-all duration-300'
+                                className='relative group w-72 mx-auto h-40 hover:scale-105 transition-all duration-300'
                             >
                                 <img
                                     src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
