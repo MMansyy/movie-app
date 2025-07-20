@@ -69,6 +69,7 @@ export default function Navbar() {
                 <ul className="space-y-2 text-white text-xl">
                     <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/">Home</NavLink></li>
                     <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/movies">Movies</NavLink></li>
+                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/geners">Geners</NavLink></li>
                     <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/tv-shows">TV Shows</NavLink></li>
                     <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/about">About</NavLink></li>
                 </ul>
