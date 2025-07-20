@@ -47,11 +47,11 @@ export default function Home() {
                         alt={Movie2.name}
                         className='w-64 rounded-lg shadow-lg'
                     />
-                    <p className='text-white text-lg max-w-1/2 font-bold mt-4'>
+                    <p className='text-white text-lg md:max-w-1/2 font-bold mt-4'>
                         {Movie2.overview}
                     </p>
                     <Link to={`series/${Movie2.id}`} className=' flex items-center gap-2 outline-1 outline-secondary text-secondary px-4 py-3 rounded-full mt-4 hover:bg-secondary hover:text-black transition-colors'>
-<svg stroke="currentColor" fill="currentColor" strokeWidth={0} viewBox="0 0 384 512" height={18} width={18} xmlns="http://www.w3.org/2000/svg"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" /></svg>
+                        <svg stroke="currentColor" fill="currentColor" strokeWidth={0} viewBox="0 0 384 512" height={18} width={18} xmlns="http://www.w3.org/2000/svg"><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z" /></svg>
                         <p className='text-xl'>Watch Now</p>
                     </Link>
 
