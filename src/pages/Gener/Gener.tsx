@@ -69,9 +69,9 @@ export default function Gener() {
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, amount: 0.2 }}
+                        viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10 mt-10'>
+                        className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-10'>
                         {MovieData?.data?.results?.map((movie: any) => (
                             <Link
                                 to={`/movie/${movie.id}`}
@@ -111,7 +111,7 @@ export default function Gener() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.2 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-10 mt-10'>
+                        className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-10'>
                         {SeriesData?.data?.results?.map((movie: any) => (
                             <Link
                                 to={`/series/${movie.id}`}
