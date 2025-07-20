@@ -83,7 +83,7 @@ interface MovieDetails {
 }
 
 
-interface TVShow {
+export interface TVShow {
     adult: boolean;
     backdrop_path: string | null;
     created_by: {

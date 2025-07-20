@@ -1,11 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectFade, Autoplay, Mousewheel } from 'swiper/modules';
 import { AnimatePresence, motion } from 'framer-motion';
-import './MainSlider.css'; // استيراد ملف CSS الخاص بالمكون
+import './MainSlider.css';
 import { useEffect, useState } from 'react';
-import axios from '../../utils/axios.global.ts';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../Loader/Loader.tsx';
+import axiosInstance from '../../utils/axios.global.ts';
 
 export interface Movie {
     adult: boolean;
@@ -22,19 +22,23 @@ export interface Movie {
     video: boolean;
     vote_average: number;
     vote_count: number;
+    name?: string;
+    first_air_date?: string;
 }
 
 
 
 
-async function fetchMovies() {
-    return axios.get('movie/popular?language=en-US&page=1')
-}
 
-export default function MainSlider() {
+export default function MainSlider({ url }: { url: string }) {
+
+    async function fetchMovies() {
+        return axiosInstance.get(url)
+    }
 
     const { data, isLoading } = useQuery({
-        queryKey: ['topMovies'],
+        queryKey: ['topMovies', url],
+        enabled: !!url,
         queryFn: fetchMovies,
         refetchOnWindowFocus: false,
     })
@@ -131,8 +135,8 @@ export default function MainSlider() {
                                         transition={{ duration: 0.8 }}
                                         className='absolute bottom-1/4 md:bottom-1/3 md:left-20 px-4  text-center md:text-left z-20 text-white flex flex-col items-center lg:items-start'
                                     >
-                                        <h2 className='text-3xl font-extrabold mb-2'>{slide.title}</h2>
-                                        <p className='text-xl  font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{slide.vote_average.toString().length > 4 ? slide.vote_average.toString().slice(0, 4) : slide.vote_average.toString()}</span></span>  | <span>{slide.release_date}</span>   |  <span>{slide.original_language.toUpperCase()}</span>  </p>
+                                        <h2 className='text-3xl font-extrabold mb-2'>{slide.title || slide?.name}</h2>
+                                        <p className='text-xl  font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{slide.vote_average.toString().length > 4 ? slide.vote_average.toString().slice(0, 4) : slide.vote_average.toString()}</span></span>  | <span>{slide.release_date || slide?.first_air_date.slice(0, 4)}</span>   |  <span>{slide.original_language.toUpperCase()}</span>  </p>
                                         <p className='text-lg mb-4 line-clamp-2  md:w-2/5'>{slide.overview}</p>
                                         <a href={slide.poster_path} className='text-black bg-[#38BDF8] lg:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
                                             <span>

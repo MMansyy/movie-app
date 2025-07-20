@@ -1,0 +1,3 @@
+.letter-shadow-r {
+    mask-image: linear-gradient(to right, black 36%, transparent 100%);
+}

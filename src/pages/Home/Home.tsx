@@ -28,7 +28,7 @@ export default function Home() {
 
     return (
         <div className=''>
-            <MainSlider />
+            <MainSlider url='movie/popular?language=en-US&page=1' />
             <Slider text='Trendig this week' url='trending/movie/week?language=en-US' path='movie' />
             <Slider text='Top 10 Movies Today' url='trending/movie/day?language=en-US' type='top10' path='movie' />
             <div className='h-screen my-10 relative overflow-hidden'>

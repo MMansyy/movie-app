@@ -6,6 +6,7 @@ import './App.css'
 import Movie from './pages/Movie/Movie'
 import MainLayout from './layouts/MainLayout'
 import Geners from './pages/Geners/Geners'
+import Gener from './pages/Gener/Gener'
 
 export default function App() {
 
@@ -31,6 +32,10 @@ export default function App() {
         {
           path: '/geners',
           element: <Geners />
+        },
+        {
+          path: '/gener/:type/:id',
+          element: <Gener />
         }
       ]
     }

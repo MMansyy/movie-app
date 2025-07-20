@@ -30,9 +30,7 @@ export default function Navbar() {
                             <li><NavLink to="/movies" className="text-white">Movies</NavLink></li>
                             <li><NavLink to="/geners" className="text-white">Geners</NavLink></li>
                             <li><NavLink to="/tv-shows" className="text-white">TV Shows</NavLink></li>
-                            <li><NavLink to="/about" className="text-white">About</NavLink></li>
                         </ul>
-
                         <div className="flex items-center gap-3">
                             <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24"
                                 className="w-8 h-8 text-white" xmlns="http://www.w3.org/2000/svg">
@@ -71,7 +69,6 @@ export default function Navbar() {
                     <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/movies">Movies</NavLink></li>
                     <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/geners">Geners</NavLink></li>
                     <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/tv-shows">TV Shows</NavLink></li>
-                    <li className=' bg-transparent hover:bg-gray-800 transition-all duration-300  rounded-4xl py-2 px-4 text-lg'><NavLink to="/about">About</NavLink></li>
                 </ul>
             </div>
         </>
