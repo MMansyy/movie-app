@@ -144,13 +144,13 @@ export default function Gener() {
                     </motion.div>
                 </div>}
             <div className='flex justify-center items-center space-x-4 mt-20'>
-                <Link onClick={() => scrollToSection()} to={`/gener/${type}/${id}?name=${searchParams.get('name')}&page=${parseInt(pageNum) - 1}`} className='px-4 py-2 text-secondary hover:bg-secondary hover:text-black transition-all font-bold duration-300 outline-1 rounded-full text-lg disabled:opacity-50' disabled={parseInt(pageNum) <= 1}>
+                {parseInt(pageNum) > 1 && <Link onClick={() => scrollToSection()} to={`/gener/${type}/${id}?name=${searchParams.get('name')}&page=${parseInt(pageNum) - 1}`} className='px-4 py-2 text-secondary hover:bg-secondary hover:text-black transition-all font-bold duration-300 outline-1 rounded-full text-lg disabled:opacity-50'>
                     Previous
-                </Link>
+                </Link>}
                 <Link onClick={() => scrollToSection()} to={`/gener/${type}/${id}?name=${searchParams.get('name')}&page=${parseInt(pageNum) + 1}`} className='px-4 py-2 text-secondary hover:bg-secondary hover:text-black transition-all font-bold duration-300 outline-1 rounded-full text-lg'>
                     Next
                 </Link>
-            </div>
+            </div >
         </>
     )
 }
