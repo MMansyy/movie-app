@@ -28,6 +28,7 @@ export default function Navbar() {
                         <ul className="hidden md:flex space-x-6 text-lg absolute left-1/2 -translate-x-1/2 main">
                             <li><NavLink to="/" className="text-white">Home</NavLink></li>
                             <li><NavLink to="/movies" className="text-white">Movies</NavLink></li>
+                            <li><NavLink to="/geners" className="text-white">Geners</NavLink></li>
                             <li><NavLink to="/tv-shows" className="text-white">TV Shows</NavLink></li>
                             <li><NavLink to="/about" className="text-white">About</NavLink></li>
                         </ul>

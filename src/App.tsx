@@ -5,6 +5,7 @@ import 'swiper/swiper-bundle.css'
 import './App.css'
 import Movie from './pages/Movie/Movie'
 import MainLayout from './layouts/MainLayout'
+import Geners from './pages/Geners/Geners'
 
 export default function App() {
 
@@ -26,6 +27,10 @@ export default function App() {
         {
           path: '/series/:movieId',
           element: <Movie type='tv' />
+        },
+        {
+          path: '/geners',
+          element: <Geners />
         }
       ]
     }

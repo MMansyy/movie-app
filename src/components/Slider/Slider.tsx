@@ -119,7 +119,7 @@ export default function Slider({ text, url, type, path }: SliderProps) {
                 >
                     {type !== 'top10' && trendingMovies.map((movie) => (
                         <SwiperSlide key={movie.id} className="mx-6 md:mx-0 group">
-                            <Link to={`/${path ? 'series' : 'movie'}/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
+                            <Link to={`/${path ? path : ''}/${movie.id}`} className="relative w-fit flex flex-col items-center justify-center">
                                 <img
                                     src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : 'https://via.placeholder.com/150'}
                                     alt={movie.title}

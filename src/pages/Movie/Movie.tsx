@@ -188,7 +188,7 @@ interface MovieVideos {
 
 
 
-export default function Movie({ type }: { type?: 'movie' | 'tv' }) {
+export default function Movie({ type }: { type: 'movie' | 'tv' }) {
     const { movieId } = useParams<{ movieId: string }>()
     const [Film, setFilm] = useState<MovieDetails | TVShow | null>(null)
     const [movieImages, setMovieImages] = useState<MovieImages | null>(null)
@@ -367,7 +367,7 @@ export default function Movie({ type }: { type?: 'movie' | 'tv' }) {
                         }
                         {movieImages?.backdrops.map((slide) => (
                             <>
-                                <SwiperSlide key={slide?.iso_639_1} className='relative'>
+                                <SwiperSlide key={slide?.file_path} className='relative'>
                                     <img
                                         src={slide?.file_path ? `https://image.tmdb.org/t/p/original${slide?.file_path}` : ''}
                                         className='w-full h-full object-cover'
@@ -463,7 +463,7 @@ export default function Movie({ type }: { type?: 'movie' | 'tv' }) {
 
             </div>
             <div className='py-16'>
-                <Slider text='Recommendation' url={`${type}/${movieId}/recommendations`} path='tv' />
+                <Slider text='Recommendation' url={`${type}/${movieId}/recommendations`} path={type} />
             </div>
             {(Loading1 || Loading2 || Loading3 || Loading4) && <Loader />}
         </>
