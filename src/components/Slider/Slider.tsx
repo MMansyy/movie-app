@@ -11,13 +11,15 @@ import { Link } from 'react-router-dom';
 interface SliderProps {
     text?: string;
     url: string;
+    init?: 'movie' | 'tv';
+    selector?: boolean
     type?: 'top10'
     path: 'movie' | 'tv';
 }
 
 
 
-export default function Slider({ text, url, type, path }: SliderProps) {
+export default function Slider({ text, url, type, path, init, selector }: SliderProps) {
     async function fetchMovies() {
         if (category === 'tv') {
             return axiosInstance.get(`trending/tv/week?language=en-US`);
@@ -26,7 +28,7 @@ export default function Slider({ text, url, type, path }: SliderProps) {
     }
 
     const [trendingMovies, settrendingMovies] = useState<Movie[]>([])
-    const [category, setCategory] = useState<'movie' | 'tv'>('movie');
+    const [category, setCategory] = useState<'movie' | 'tv'>(init || 'movie');
     const categoryRef = useRef<HTMLSelectElement>(undefined);
 
     const { data } = useQuery({

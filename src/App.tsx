@@ -9,6 +9,8 @@ import Geners from './pages/Geners/Geners'
 import Gener from './pages/Gener/Gener'
 import Search from './pages/Search/Search'
 import Movies from './pages/Movies/Movies'
+import Fav from './pages/Fav/Fav'
+import Series from './pages/Series/Series'
 
 export default function App() {
 
@@ -46,6 +48,14 @@ export default function App() {
         {
           path: '/movies',
           element: <Movies />
+        },
+        {
+          path: '/favourites',
+          element: <Fav />
+        },
+        {
+          path: '/tv-shows',
+          element: <Series />
         }
       ]
     }

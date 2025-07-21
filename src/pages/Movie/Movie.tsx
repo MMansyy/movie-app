@@ -9,6 +9,10 @@ import Slider from '../../components/Slider/Slider'
 import { useQuery } from '@tanstack/react-query'
 import axiosInstance from '../../utils/axios.global'
 import Loader from '../../components/Loader/Loader'
+import { CiHeart } from 'react-icons/ci'
+import { FaHeart } from "react-icons/fa";
+import { motion } from 'framer-motion'
+import { addToFavourites, isFavourite } from '../../utils/addFav'
 
 interface ImageItem {
     aspect_ratio: number;
@@ -194,6 +198,18 @@ export default function Movie({ type }: { type: 'movie' | 'tv' }) {
     const [movieImages, setMovieImages] = useState<MovieImages | null>(null)
     const [movieVideos, setMovieVideos] = useState<MovieVideos[]>([])
     const [cast, setCast] = useState([]);
+    const [isFav, setIsFav] = useState(() => !!isFavourite(Film?.id));
+
+    useEffect(() => {
+        setIsFav(!!isFavourite(Film?.id));
+    }, [Film]);
+
+    const handleFavouriteClick = (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        addToFavourites(Film);
+        setIsFav(!!isFavourite(Film?.id)); // إعادة التقييم بعد الإضافة
+    };
 
     async function fetchMovieDetails(movieId: string) {
         if (!movieId) return null;
@@ -319,6 +335,19 @@ export default function Movie({ type }: { type: 'movie' | 'tv' }) {
                         <div className='flex flex-col items-center justify-center gap-2'>
                             {movieImages?.logos[0]?.file_path ? <img className='w-56 md:w-64' src={`https://image.tmdb.org/t/p/original${movieImages?.logos[0]?.file_path}`} alt="" /> : <h1 className='text-4xl md:text-4xl md:self-start font-bold text-white'>{(Film as MovieDetails)?.title}</h1>}
                             <p className='font-base font-semibold mt-2 md:mt-5 mb-5 flex gap-4 truncate'><span className='text-yellow-400'> ★ <span className='text-white'>{Film?.vote_average.toString().length > 3 ? Film?.vote_average.toString().slice(0, 3) : Film?.vote_average.toString()}</span></span>  <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div> <span>{(Film as MovieDetails)?.release_date?.split('-')[0] || (Film as TVShow)?.first_air_date?.split('-')[0]}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div>  {type === 'movie' && <><span> {(Film as MovieDetails)?.runtime + ' min'}</span>   <div className='w-0.5 h-6 rounded-2xl bg-white/30'></div></>} <span>{Film?.original_language.toUpperCase()}</span>  </p>
+                            <motion.button
+                                whileHover={{ scale: 1.2 }}
+                                whileTap={{ scale: 0.9 }}
+                                onClick={handleFavouriteClick}
+                                className="cursor-pointer mt-0 flex items-center justify-center rounded-full"
+                            >
+                                {isFav ? (
+                                    <FaHeart className="text-secondary text-4xl" />
+                                ) : (
+                                    <CiHeart className="text-secondary text-4xl" />
+                                )}
+                            </motion.button>
+
                         </div>
                     </div>
                     <div

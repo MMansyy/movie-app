@@ -57,14 +57,8 @@ export default function MainSlider({ url }: { url: string }) {
     }, [movies]);
 
 
-
-
-
-
-
     return (
         <>
-
             <div className='w-full h-[90vh] main-slider relative'>
                 <div className="absolute inset-y-0 right-24 z-10 bottom-1/4 hidden gap-4 lg:flex lg:flex-col lg:items-center lg:justify-end">
                     <span className='text-white font-semibold text-lg'>{totalSlides}</span>
@@ -111,7 +105,7 @@ export default function MainSlider({ url }: { url: string }) {
                                     exit={{ opacity: 0, y: 30 }}
                                     transition={{ duration: 0.8 }}
                                     className="absolute bottom-1/3  right-1/5 2xl:right-1/4 z-40 hidden lg:block">
-                                    <Link to={`movie/${slide.id}`} className="group flex items-center gap-4 cursor-pointer">
+                                    <Link to={`/${slide.first_air_date ? 'series' : 'movie'}/${slide.id}`} className="group flex items-center gap-4 cursor-pointer">
                                         <span className="grid h-32 w-32 place-content-center rounded-full border-2 border-[#38BDF8] transition-all duration-300 ease-in-out group-hover:bg-[#38BDF8]">
                                             <svg
                                                 className="w-11 h-11 text-[#38BDF8] group-hover:text-white transition-colors duration-300"
