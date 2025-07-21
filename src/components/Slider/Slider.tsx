@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 
 
 interface SliderProps {
-    text: string;
+    text?: string;
     url: string;
     type?: 'top10'
-    path?: 'movie' | 'tv';
+    path: 'movie' | 'tv';
 }
 
 
@@ -48,7 +48,7 @@ export default function Slider({ text, url, type, path }: SliderProps) {
     return (
         <div className='bg-primary overflow-hidden relative'>
             <div className='container mx-auto px-4 md:px-10 py-10'>
-                {type !== 'top10' && <h1 className='text-3xl md:text-3xl font-bold text-left mb-6'>{text}</h1>}
+                {(type !== 'top10' && text) && <h1 className='text-3xl md:text-3xl font-bold text-left mb-6'>{text}</h1>}
                 {type === 'top10' &&
                     <div className="flex items-center justify-between gap-8 px-4 mb-7 sm:px-7 max-sm:flex-col">
 
@@ -58,7 +58,7 @@ export default function Slider({ text, url, type, path }: SliderProps) {
                                 {['T', 'O', 'P', '1', '0'].map((char, idx) => (
                                     <span
                                         key={idx}
-                                        className={`relative  text-outline  ${idx === 4 ? 'lg:-ml-8 -ml-2.5' : idx === 3 ? 'ml-0 ' : 'lg:-ml-7 -ml-3'
+                                        className={`relative letter-shadow-r  text-outline  ${idx === 4 ? 'lg:-ml-8 -ml-2.5' : idx === 3 ? 'ml-0 ' : 'lg:-ml-7 -ml-3'
                                             }`}
                                     >
                                         {char}

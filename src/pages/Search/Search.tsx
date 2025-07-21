@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useRef, useState } from 'react'
+import React, { use, useEffect, useRef, useState } from 'react'
 import axiosInstance from '../../utils/axios.global'
 import { Link, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -8,6 +8,7 @@ export default function Search() {
     const inputRef = useRef<HTMLInputElement>(null)
     const [searchParams, setSearchParams] = useSearchParams()
     const [searchQuery, setSearchQuery] = useState<string>(searchParams.get('query') || '')
+    const pageNumber = searchParams.get('page') ? parseInt(searchParams.get('page')) : 1
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter' && inputRef.current) {
@@ -18,15 +19,19 @@ export default function Search() {
     }
 
     const { data } = useQuery({
-        queryKey: ['search', searchQuery],
+        queryKey: ['search', searchQuery, pageNumber],
         queryFn: async () => {
             if (!searchQuery) return []
-            const response = await axiosInstance.get(`/search/multi?query=${searchQuery}&include_adult=true`)
-            return response.data.results
+            const response = await axiosInstance.get(`/search/multi?query=${searchQuery}&include_adult=false&page=${pageNumber}`)
+            return response.data
         },
         enabled: !!searchQuery,
         refetchOnWindowFocus: false,
     })
+
+    useEffect(() => {
+        document.title = `Search - ${searchQuery} - Movie App`
+    }, [searchQuery])
 
     return (
         <div className='max-w-7xl mx-auto min-h-[72vh] flex flex-col items-center justify-start pt-20'>
@@ -36,7 +41,7 @@ export default function Search() {
                     onKeyDown={handleKeyDown}
                     placeholder='Search for everything you want and we will get it for you...'
                     type="text"
-                    className='w-full outline-1 outline-secondary rounded-full py-3 pr-24 pl-5 bg-[#0F172A] text-white'
+                    className='w-full outline-1 outline-secondary focus:outline-2 rounded-full py-3 pr-24 pl-5 bg-[#0F172A] text-white'
                 />
                 <button
                     onClick={() => {
@@ -53,7 +58,7 @@ export default function Search() {
             </div>
 
             <div className='w-full min-h-[40vh] mt-10'>
-                {!data || data.length === 0 ? (
+                {!data?.results || data?.results.length === 0 ? (
                     <p className='w-1/2 text-xl text-gray-300 my-6 font-light text-center mx-auto'>
                         Find your favorite movie and TV show easily. Type in the title or keyword and discover detailed information. Explore our catalog and find what to watch in seconds!
                     </p>
@@ -62,10 +67,10 @@ export default function Search() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        transition={{ duration: 1, ease: "easeOut" }}
                         className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5'
                     >
-                        {data.map((movie: any) => (
+                        {data?.results.map((movie: any) => (
                             <Link
                                 to={`/${movie.media_type === 'movie' ? 'movie' : 'series'}/${movie.id}`}
                                 key={movie.id}
@@ -92,8 +97,31 @@ export default function Search() {
                                 </div>
                             </Link>
                         ))}
+
                     </motion.div>
                 )}
+                <div className='flex justify-center items-center space-x-4 mt-20'>
+                    {pageNumber > 1 && <button onClick={() => {
+                        const prevPage = pageNumber - 1;
+                        setSearchParams({ query: searchQuery, page: prevPage.toString() });
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }} className='px-4 py-2 text-secondary hover:bg-secondary hover:text-black transition-all font-bold duration-300 outline-1 rounded-full text-lg disabled:opacity-50'>
+                        Previous
+                    </button>}
+                    {pageNumber < data?.total_pages && (
+                        <button
+                            onClick={() => {
+                                const nextPage = pageNumber + 1;
+                                setSearchParams({ query: searchQuery, page: nextPage.toString() });
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
+                            className='px-4 py-2 text-secondary hover:bg-secondary hover:text-black transition-all font-bold duration-300 outline-1 rounded-full text-lg'
+                        >
+                            Next
+                        </button>
+                    )}
+
+                </div >
             </div>
         </div>
     )

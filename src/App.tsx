@@ -8,6 +8,7 @@ import MainLayout from './layouts/MainLayout'
 import Geners from './pages/Geners/Geners'
 import Gener from './pages/Gener/Gener'
 import Search from './pages/Search/Search'
+import Movies from './pages/Movies/Movies'
 
 export default function App() {
 
@@ -41,6 +42,10 @@ export default function App() {
         {
           path: '/search',
           element: <Search />
+        },
+        {
+          path: '/movies',
+          element: <Movies />
         }
       ]
     }

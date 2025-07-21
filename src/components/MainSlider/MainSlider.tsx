@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Loader from '../Loader/Loader.tsx';
 import axiosInstance from '../../utils/axios.global.ts';
+import { Link } from 'react-router-dom';
 
 export interface Movie {
     adult: boolean;
@@ -110,7 +111,7 @@ export default function MainSlider({ url }: { url: string }) {
                                     exit={{ opacity: 0, y: 30 }}
                                     transition={{ duration: 0.8 }}
                                     className="absolute bottom-1/3  right-1/5 2xl:right-1/4 z-40 hidden lg:block">
-                                    <a className="group flex items-center gap-4 cursor-pointer">
+                                    <Link to={`movie/${slide.id}`} className="group flex items-center gap-4 cursor-pointer">
                                         <span className="grid h-32 w-32 place-content-center rounded-full border-2 border-[#38BDF8] transition-all duration-300 ease-in-out group-hover:bg-[#38BDF8]">
                                             <svg
                                                 className="w-11 h-11 text-[#38BDF8] group-hover:text-white transition-colors duration-300"
@@ -124,7 +125,7 @@ export default function MainSlider({ url }: { url: string }) {
                                         <span className="text-white text-3xl font-semibold uppercase tracking-wider transition-colors duration-300 group-hover:text-[#38BDF8]">
                                             Watch Now!
                                         </span>
-                                    </a>
+                                    </Link>
                                 </motion.div>
                                 <AnimatePresence mode="wait">
                                     <motion.div
@@ -138,11 +139,11 @@ export default function MainSlider({ url }: { url: string }) {
                                         <h2 className='text-3xl font-extrabold mb-2'>{slide.title || slide?.name}</h2>
                                         <p className='text-xl  font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{slide.vote_average.toString().length > 4 ? slide.vote_average.toString().slice(0, 4) : slide.vote_average.toString()}</span></span>  | <span>{slide.release_date || slide?.first_air_date.slice(0, 4)}</span>   |  <span>{slide.original_language.toUpperCase()}</span>  </p>
                                         <p className='text-lg mb-4 line-clamp-2  md:w-2/5'>{slide.overview}</p>
-                                        <a href={slide.poster_path} className='text-black bg-[#38BDF8] lg:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
+                                        <Link to={`movie/${slide.id}`} className='text-black bg-[#38BDF8] lg:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
                                             <span>
                                                 Watch Now
                                             </span>
-                                        </a>
+                                        </Link>
                                     </motion.div>
                                 </AnimatePresence>
 
