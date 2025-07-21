@@ -1,0 +1,100 @@
+import { useQuery } from '@tanstack/react-query'
+import React, { useRef, useState } from 'react'
+import axiosInstance from '../../utils/axios.global'
+import { Link, useSearchParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
+
+export default function Search() {
+    const inputRef = useRef<HTMLInputElement>(null)
+    const [searchParams, setSearchParams] = useSearchParams()
+    const [searchQuery, setSearchQuery] = useState<string>(searchParams.get('query') || '')
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter' && inputRef.current) {
+            setSearchQuery(inputRef.current.value)
+            inputRef.current.blur()
+            setSearchParams({ query: inputRef.current.value })
+        }
+    }
+
+    const { data } = useQuery({
+        queryKey: ['search', searchQuery],
+        queryFn: async () => {
+            if (!searchQuery) return []
+            const response = await axiosInstance.get(`/search/multi?query=${searchQuery}&include_adult=true`)
+            return response.data.results
+        },
+        enabled: !!searchQuery,
+        refetchOnWindowFocus: false,
+    })
+
+    return (
+        <div className='max-w-7xl mx-auto min-h-[72vh] flex flex-col items-center justify-start pt-20'>
+            <div className='flex items-center justify-center relative mt-20 md:w-2/3 w-4/5'>
+                <input
+                    ref={inputRef}
+                    onKeyDown={handleKeyDown}
+                    placeholder='Search for everything you want and we will get it for you...'
+                    type="text"
+                    className='w-full outline-1 outline-secondary rounded-full py-3 pr-24 pl-5 bg-[#0F172A] text-white'
+                />
+                <button
+                    onClick={() => {
+                        if (inputRef.current) {
+                            setSearchQuery(inputRef.current.value)
+                            setSearchParams({ query: inputRef.current.value })
+                            inputRef.current.blur()
+                        }
+                    }}
+                    className='absolute right-1 top-1 cursor-pointer bg-secondary text-black px-5 py-2 rounded-full hover:bg-secondary/80 transition-all duration-300'
+                >
+                    Search
+                </button>
+            </div>
+
+            <div className='w-full min-h-[40vh] mt-10'>
+                {!data || data.length === 0 ? (
+                    <p className='w-1/2 text-xl text-gray-300 my-6 font-light text-center mx-auto'>
+                        Find your favorite movie and TV show easily. Type in the title or keyword and discover detailed information. Explore our catalog and find what to watch in seconds!
+                    </p>
+                ) : (
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 px-5'
+                    >
+                        {data.map((movie: any) => (
+                            <Link
+                                to={`/${movie.media_type === 'movie' ? 'movie' : 'series'}/${movie.id}`}
+                                key={movie.id}
+                                className='relative group w-72 mx-auto h-40 hover:scale-105 transition-all duration-300'
+                            >
+                                <img
+                                    src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
+                                    alt={movie.name || movie.title}
+                                    className='w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-300'
+                                />
+                                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all duration-300 rounded-lg"></div>
+                                <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg'></div>
+                                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
+                                    <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                </div>
+                                <div className='absolute bottom-2 inset-x-2 flex justify-between items-center text-white font-semibold z-50'>
+                                    <p>{parseInt(movie?.vote_average).toFixed(1)} <span className='text-yellow-400'>★</span></p>
+                                    <p>{movie?.release_date?.slice(0, 4) || movie?.first_air_date?.slice(0, 4)}</p>
+                                </div>
+                                <div className='flex justify-between items-center mt-1'>
+                                    <h5 className='text-white group-hover:text-secondary transition-all duration-300 line-clamp-1 font-semibold'>
+                                        {movie.name || movie.title}
+                                    </h5>
+                                </div>
+                            </Link>
+                        ))}
+                    </motion.div>
+                )}
+            </div>
+        </div>
+    )
+}

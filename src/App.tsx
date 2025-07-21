@@ -7,6 +7,7 @@ import Movie from './pages/Movie/Movie'
 import MainLayout from './layouts/MainLayout'
 import Geners from './pages/Geners/Geners'
 import Gener from './pages/Gener/Gener'
+import Search from './pages/Search/Search'
 
 export default function App() {
 
@@ -36,6 +37,10 @@ export default function App() {
         {
           path: '/gener/:type/:id',
           element: <Gener />
+        },
+        {
+          path: '/search',
+          element: <Search />
         }
       ]
     }

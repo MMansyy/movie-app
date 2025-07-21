@@ -85,7 +85,7 @@ export default function Gener() {
                                 />
 
                                 <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all duration-300 rounded-lg"></div>
-
+                                <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg'></div>
                                 <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
                                     <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
                                 </div>
@@ -96,7 +96,7 @@ export default function Gener() {
                                 </div>
 
                                 <div className='flex justify-between items-center mt-1'>
-                                    <h5 className='text-white group-hover:text-secondary transition-all duration-300  font-semibold'>{movie.name || movie.title}</h5>
+                                    <h5 className='text-white group-hover:text-secondary transition-all duration-300 line-clamp-1  font-semibold'>{movie.name || movie.title}</h5>
                                 </div>
                             </Link>
 
@@ -125,6 +125,7 @@ export default function Gener() {
                                 />
 
                                 <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all duration-300 rounded-lg"></div>
+                                <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg'></div>
 
                                 <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
                                     <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
