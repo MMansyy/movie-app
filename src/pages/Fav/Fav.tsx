@@ -13,9 +13,9 @@ export default function Fav() {
     
     return (
         <div className='container mx-auto px-4 md:px-10'>
-            <div className='min-h-screen flex flex-col justify-center items-center mt-26'>
+            <div className='min-h-screen flex flex-col justify-center items-center mt-15'>
 
-                <h1 className='text-3xl md:text-3xl font-bold text-left mb-12'>Favourites</h1>
+                <h1 className='text-3xl md:text-3xl font-bold text-left mb-6'>Favourites</h1>
                 <div className='flex flex-wrap gap-7 items-center justify-center min-h-[60vh]'>
                     {
                         favourites.length > 0 ? (
