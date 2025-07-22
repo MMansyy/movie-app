@@ -10,17 +10,18 @@ export default function Fav() {
         window.scrollTo(0, 0)
     }, [])
 
-    
     return (
-        <div className='container mx-auto px-4 md:px-10'>
-            <div className='min-h-screen flex flex-col justify-center items-center mt-15'>
+        <div className='container mx-auto px-4 md:px-10 pt-24'>
+            <div className='min-h-screen flex flex-col items-center'>
 
-                <h1 className='text-3xl md:text-3xl font-bold text-left mb-6'>Favourites</h1>
-                <div className='flex flex-wrap gap-7 items-center justify-center min-h-[60vh]'>
+                <h1 className='text-3xl md:text-4xl font-bold mb-8'>Favourites</h1>
+
+                <div className='flex flex-wrap gap-7 items-center justify-center min-h-[50vh]'>
                     {
                         favourites.length > 0 ? (
                             favourites.map((movie: any) => (
                                 <Link
+                                    key={movie.id}
                                     to={`/${movie.last_air_date ? 'series' : 'movie'}/${movie.id}`}
                                     className="relative w-fit flex flex-col items-center justify-center group"
                                 >
@@ -40,10 +41,9 @@ export default function Fav() {
                             <p className='text-xl text-gray-500'>No favourites added yet.</p>
                         )
                     }
-
                 </div>
-            </div>
 
+            </div>
         </div>
     )
 }
