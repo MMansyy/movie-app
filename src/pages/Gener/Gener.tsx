@@ -70,34 +70,40 @@ export default function Gener() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        transition={{ duration: 1, ease: "easeOut" }}
                         className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-10'>
                         {MovieData?.data?.results?.map((movie: any) => (
                             <Link
                                 to={`/movie/${movie.id}`}
                                 key={movie.id}
-                                className='relative group w-72 mx-auto h-40 hover:scale-105 transition-all duration-300'
                             >
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
-                                    alt={movie.name || movie.title}
-                                    className='w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-300'
-                                />
+                                <motion.div
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.1 }}
+                                    transition={{ duration: 0.8, ease: "easeOut" }}
+                                    className='relative group w-72 mx-auto h-40 hover:scale-105 transition-all duration-300'>
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
+                                        alt={movie.name || movie.title}
+                                        className='w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-300'
+                                    />
 
-                                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all duration-300 rounded-lg"></div>
-                                <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg'></div>
-                                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
-                                    <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                </div>
+                                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all duration-300 rounded-lg"></div>
+                                    <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg'></div>
+                                    <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
+                                        <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                    </div>
 
-                                <div className='absolute bottom-2 inset-x-2 flex justify-between items-center text-white font-semibold z-50'>
-                                    <p>{movie?.vote_average.toFixed(1)} <span className='text-yellow-400'>★</span></p>
-                                    <p>{movie?.release_date?.slice(0, 4) || movie?.first_air_date?.slice(0, 4)}</p>
-                                </div>
+                                    <div className='absolute bottom-2 inset-x-2 flex justify-between items-center text-white font-semibold z-50'>
+                                        <p>{movie?.vote_average.toFixed(1)} <span className='text-yellow-400'>★</span></p>
+                                        <p>{movie?.release_date?.slice(0, 4) || movie?.first_air_date?.slice(0, 4)}</p>
+                                    </div>
 
-                                <div className='flex justify-between items-center mt-1'>
-                                    <h5 className='text-white group-hover:text-secondary transition-all duration-300 line-clamp-1  font-semibold'>{movie.name || movie.title}</h5>
-                                </div>
+                                    <div className='flex justify-between items-center mt-1'>
+                                        <h5 className='text-white group-hover:text-secondary transition-all duration-300 line-clamp-1  font-semibold'>{movie.name || movie.title}</h5>
+                                    </div>
+                                </motion.div>
                             </Link>
 
                         ))}
@@ -110,35 +116,41 @@ export default function Gener() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, amount: 0.1 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        transition={{ duration: 1, ease: "easeOut" }}
                         className='grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 mt-10'>
                         {SeriesData?.data?.results?.map((movie: any) => (
                             <Link
                                 to={`/series/${movie.id}`}
                                 key={movie.id}
-                                className='relative group w-72 mx-auto h-40 hover:scale-105 transition-all duration-300'
                             >
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
-                                    alt={movie.name || movie.title}
-                                    className='w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-300'
-                                />
+                                <motion.div
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, amount: 0.1 }}
+                                    transition={{ duration: 0.8, ease: "easeOut" }}
+                                    className='relative group w-72 mx-auto h-40 hover:scale-105 transition-all duration-300'>
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path || movie.poster_path}`}
+                                        alt={movie.name || movie.title}
+                                        className='w-full h-full object-cover rounded-lg shadow-lg transition-transform duration-300'
+                                    />
 
-                                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all duration-300 rounded-lg"></div>
-                                <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg'></div>
+                                    <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-50 transition-all duration-300 rounded-lg"></div>
+                                    <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent rounded-lg'></div>
 
-                                <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
-                                    <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
-                                </div>
+                                    <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0 z-50 group-hover:w-10 group-hover:h-10 transition-all duration-300 flex items-center justify-center bg-secondary text-black rounded-full'>
+                                        <svg stroke="currentColor" fill="none" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height={24} width={24} xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10" /><path d="M7 17 17 7" /></svg>
+                                    </div>
 
-                                <div className='absolute bottom-2 inset-x-2 flex justify-between items-center text-white font-semibold z-50'>
-                                    <p>{movie?.vote_average.toFixed(1)} <span className='text-yellow-400'>★</span></p>
-                                    <p>{movie?.release_date?.slice(0, 4) || movie?.first_air_date?.slice(0, 4)}</p>
-                                </div>
+                                    <div className='absolute bottom-2 inset-x-2 flex justify-between items-center text-white font-semibold z-50'>
+                                        <p>{movie?.vote_average.toFixed(1)} <span className='text-yellow-400'>★</span></p>
+                                        <p>{movie?.release_date?.slice(0, 4) || movie?.first_air_date?.slice(0, 4)}</p>
+                                    </div>
 
-                                <div className='flex justify-between items-center mt-1'>
-                                    <h5 className='text-white group-hover:text-secondary transition-all duration-300  font-semibold'>{movie.name || movie.title}</h5>
-                                </div>
+                                    <div className='flex justify-between items-center mt-1'>
+                                        <h5 className='text-white group-hover:text-secondary line-clamp-1 transition-all duration-300  font-semibold'>{movie.name || movie.title}</h5>
+                                    </div>
+                                </motion.div>
                             </Link>
 
                         ))}
