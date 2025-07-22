@@ -19,6 +19,7 @@ export default function Series() {
 
     useEffect(() => {
         document.title = 'Series - Movie App'
+        window.scrollTo(0, 0)
     }, [])
 
     return (

@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 export default function Fav() {
 
     const [favourites, setfavourites] = useState<[]>(JSON.parse(localStorage.getItem('favourites')) || []);
 
-    JSON.parse(localStorage.getItem('favourites') || '[]');
+    useEffect(() => {
+        document.title = 'Favourites - Movie App'
+        window.scrollTo(0, 0)
+    }, [])
 
+    
     return (
         <div className='container mx-auto px-4 md:px-10'>
             <div className='min-h-screen flex flex-col justify-center items-center mt-26'>
