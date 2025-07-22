@@ -28,11 +28,11 @@ export default function Movies() {
     return (
         <>
             <MainSlider url='/movie/popular' />
-            <Slider type='top10' url='trending/movie/day?language=en-US' text='' path='movie' />
+            <Slider type='top10' url='trending/movie/day?language=en-US' path='movie' selector={true} />
             <Slider url='/movie/upcoming' text='Coming soon' path='movie' />
             <div>
-                <div className='px-14 flex flex-col gap-4'>
-                    <h3 className="text-8xl font-bold   lg:text-9xl flex">
+                <div className='md:px-14 flex flex-col items-center gap-4'>
+                    <h3 className="text-7xl  font-bold lg:text-9xl flex">
                         {'TOP RATED'.split('').map((char, idx) => (
                             <span
                                 key={idx}
@@ -44,7 +44,7 @@ export default function Movies() {
                         ))}
                     </h3>
                 </div>
-                <Slider url='/movie/top_rated' path='movie' />
+                <Slider url='/movie/top_rated' path='movie'  />
             </div>
             <div className='h-screen my-20 relative overflow-hidden'>
                 <img

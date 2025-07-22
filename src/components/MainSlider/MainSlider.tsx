@@ -133,7 +133,7 @@ export default function MainSlider({ url }: { url: string }) {
                                         <h2 className='text-3xl font-extrabold mb-2'>{slide.title || slide?.name}</h2>
                                         <p className='text-xl  font-semibold mt-5 mb-5 flex gap-4'><span className='text-yellow-400'> ★ <span className='text-white'>{slide.vote_average.toString().length > 4 ? slide.vote_average.toString().slice(0, 4) : slide.vote_average.toString()}</span></span>  | <span>{slide.release_date || slide?.first_air_date.slice(0, 4)}</span>   |  <span>{slide.original_language.toUpperCase()}</span>  </p>
                                         <p className='text-lg mb-4 line-clamp-2  md:w-2/5'>{slide.overview}</p>
-                                        <Link to={`movie/${slide.id}`} className='text-black bg-[#38BDF8] lg:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
+                                        <Link to={`/${slide.first_air_date ? 'series' : 'movie'}/${slide.id}`} className='text-black bg-[#38BDF8] lg:hidden hover:underline px-5 py-2 font-bold  rounded-4xl'>
                                             <span>
                                                 Watch Now
                                             </span>

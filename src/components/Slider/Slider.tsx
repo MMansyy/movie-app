@@ -75,7 +75,7 @@ export default function Slider({ text, url, type, path, init, selector }: Slider
                         </div>
 
                         <div>
-                            <select
+                            {!selector && <select
                                 ref={categoryRef}
                                 onChange={() => {
                                     setCategory(categoryRef?.current?.value as 'movie' | 'tv');
@@ -84,7 +84,7 @@ export default function Slider({ text, url, type, path, init, selector }: Slider
                                 className="px-3 py-2  rounded-full w-max max-w-xs">
                                 <option value="movie">Movies</option>
                                 <option value="tv">Series</option>
-                            </select>
+                            </select>}
                         </div>
 
                     </div>
