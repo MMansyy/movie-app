@@ -22,7 +22,7 @@ export default function Search() {
         queryKey: ['search', searchQuery, pageNumber],
         queryFn: async () => {
             if (!searchQuery) return []
-            const response = await axiosInstance.get(`/search/multi?query=${searchQuery}&include_adult=false&page=${pageNumber}`)
+            const response = await axiosInstance.get(`/search/multi?query=${searchQuery}&include_adult=true&page=${pageNumber}`)
             return response.data
         },
         enabled: !!searchQuery,
