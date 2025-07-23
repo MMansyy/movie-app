@@ -249,21 +249,24 @@ export default function Movie({ type }: { type: 'movie' | 'tv' }) {
         queryKey: ['movieDetails', movieId, type],
         queryFn: () => fetchMovieDetails(movieId || ''),
         refetchOnWindowFocus: false,
-        enabled: !!movieId
+        enabled: !!movieId,
+        staleTime: 1000 * 60 * 5, // 5 minutes
     })
 
     const { data: images, isLoading: Loading2 } = useQuery({
         queryKey: ['movieImages', movieId, type],
         queryFn: () => fetchMovieImages(movieId || ''),
         refetchOnWindowFocus: false,
-        enabled: !!movieId
+        enabled: !!movieId,
+        staleTime: 1000 * 60 * 5, // 5 minutes
     })
 
     const { data: videos, isLoading: Loading3 } = useQuery({
         queryKey: ['movieVideos', movieId, type],
         queryFn: () => fetchMovieVideos(movieId || ''),
         refetchOnWindowFocus: false,
-        enabled: !!movieId
+        enabled: !!movieId,
+        staleTime: 1000 * 60 * 5, // 5 minutes
     })
 
 
@@ -272,6 +275,7 @@ export default function Movie({ type }: { type: 'movie' | 'tv' }) {
         queryFn: () => fetchMovieCast(movieId || ''),
         refetchOnWindowFocus: false,
         enabled: !!movieId,
+        staleTime: 1000 * 60 * 5, // 5 minutes,
     });
 
 

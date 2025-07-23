@@ -42,6 +42,7 @@ export default function MainSlider({ url }: { url: string }) {
         enabled: !!url,
         queryFn: fetchMovies,
         refetchOnWindowFocus: false,
+        staleTime: 1000 * 60 * 5, // 5 minutes
     })
 
     const movies: Movie[] = data?.data?.results

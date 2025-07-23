@@ -35,7 +35,8 @@ export default function Slider({ text, url, type, path, init, selector }: Slider
         queryKey: ['trendingMovies', url, category],
         queryFn: fetchMovies,
         refetchOnWindowFocus: false,
-        enabled: !!url
+        enabled: !!url,
+        staleTime: 1000 * 60 * 5, // 5 minutes
     })
 
 

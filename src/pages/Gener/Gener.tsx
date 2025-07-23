@@ -32,6 +32,7 @@ export default function Gener() {
         queryFn: fetchGenerMovies,
         enabled: isMovieEnabled,
         refetchOnWindowFocus: false,
+        staleTime: 1000 * 60 * 5, // 5 minutes
     });
 
     const { data: SeriesData } = useQuery({
@@ -39,6 +40,7 @@ export default function Gener() {
         queryFn: fetchGenerSeries,
         enabled: isTvEnabled,
         refetchOnWindowFocus: false,
+        staleTime: 1000 * 60 * 5, // 5 minutes
     });
 
     return (
