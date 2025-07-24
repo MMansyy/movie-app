@@ -23,7 +23,6 @@ export default function Home() {
 
     useEffect(() => {
         document.title = 'Home - Movie App'
-        window.scrollTo(0, 0)
     }, [])
 
     return (

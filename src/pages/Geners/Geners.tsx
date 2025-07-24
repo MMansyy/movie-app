@@ -41,7 +41,6 @@ export default function Geners() {
 
     useEffect(() => {
         document.title = 'Geners - Movie App'
-        window.scrollTo(0, 0)
     }, [])
 
 

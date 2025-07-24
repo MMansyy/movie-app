@@ -315,7 +315,6 @@ export default function Movie({ type }: { type: 'movie' | 'tv' }) {
         setFilm(null);
         setMovieImages(null);
         setMovieVideos([]);
-        window.scroll(0, 0)
     }, [movieId]);
 
     useEffect(() => {

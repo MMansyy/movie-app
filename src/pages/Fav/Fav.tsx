@@ -7,7 +7,6 @@ export default function Fav() {
 
     useEffect(() => {
         document.title = 'Favourites - Movie App'
-        window.scrollTo(0, 0)
     }, [])
 
     return (
